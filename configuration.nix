@@ -63,9 +63,4 @@
   # *DO NOT CHANGE*
   system.stateVersion = "25.11";
 
-  services.displayManager.ly.enable = true;  
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
 }

@@ -44,7 +44,6 @@
       
       monitor = ",preferred,auto,1";
 
-      # 自動起動 (メイン機の設定をNixに移植)
       exec-once = [
         "hyprpaper"
         "zsh -c 'sleep 1 && waybar'"
