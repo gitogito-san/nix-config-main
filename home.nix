@@ -9,7 +9,13 @@
   home.packages = with pkgs; [
     neofetch # system info
     btop #  Monitor of resources
-    bat # cat clone 
+    bat # cat clone
+    vial
+    firefox
+    discord
+    google-chrome
+    vscode
+    nodejs_24
   ];
 
   home.sessionVariables = {

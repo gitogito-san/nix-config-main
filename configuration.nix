@@ -5,8 +5,8 @@
   imports =
     [
       ./hardware-configuration.nix
-    ]
-    ++ (map (n: ./modules + "/${n}") (builtins.attrNames (builtins.readDir ./modules)));
+      ./modules/default.nix
+    ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -57,10 +57,28 @@
     git
   ];
 
-   # experimental features
+  # experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # *DO NOT CHANGE*
   system.stateVersion = "25.11";
+  
+  # cnnect with miniPC
+  services.tailscale.enable = true;
 
+  # keyboard 
+  services.udev.extraRules = ''
+    # SayoDevice (ID: 8089) - Web設定ツール用
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="8089", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="8089", MODE="0666"
+
+    # Corne v4 (ID: 4653) - Vialアプリ用
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="4653", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="4653", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="4653", MODE="0666"
+  '';
+
+  # firmware
+  hardware.enableRedistributableFirmware = true;
+ 
 }

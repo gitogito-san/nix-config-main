@@ -2,7 +2,7 @@
 
 {
   # ly
-  services.displayManager.ly.enable = true;
+#  services.displayManager.ly.enable = true;
 
   # Hyprland
   programs.hyprland = {

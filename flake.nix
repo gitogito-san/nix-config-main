@@ -20,7 +20,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users.ya = ./home.nix;
-	    };
+	          };
           }
         ];
       };

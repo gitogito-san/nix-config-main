@@ -46,7 +46,7 @@
 
       exec-once = [
         "hyprpaper"
-        "zsh -c 'sleep 1 && waybar'"
+        "zsh -c 'sleep 1 && pgrep .waybar || waybar'"
         "fcitx5 -d"
         "dunst"
         "nm-applet --indicator"
@@ -58,9 +58,6 @@
 
       # 環境変数
       env = [
-        "GTK_IM_MODULE,fcitx"
-        "QT_IM_MODULE,fcitx"
-        "XMODIFIERS,@im=fcitx"
         "XCURSOR_SIZE,24"
       ];
 
@@ -94,6 +91,11 @@
         kb_layout = "jp";
         repeat_rate = 50;
         repeat_delay = 300;
+        touchpad = {
+          natural_scroll = true;
+          drag_lock = true;
+          disable_while_typing = true;
+        };
       };
 
       # ウィンドウルール
@@ -182,6 +184,8 @@
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", switch:on:Lid Switch, exec, hyprctl dispatch dpms off"
+        ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
       ];
     };
   };

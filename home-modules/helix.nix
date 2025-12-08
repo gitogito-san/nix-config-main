@@ -10,7 +10,10 @@
         line-number = "relative";
         cursorcolumn = true;
         true-color = true;
-      };
+        idle-timeout = 0;
+        clipboard-provider = "wayland";
+        default-yank-register = "+";
+        };
     };
   };
 
