@@ -12,15 +12,17 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {     
+      lifebook = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; }; 
         modules = [
-          ./configuration.nix
+          ./hosts/lifebook/default.nix
           home-manager.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.ya = ./home.nix;
+              users.ya = ./modules/home/default.nix;
 	          };
           }
         ];

@@ -41,7 +41,7 @@
 
   services.logind = {
     # 1. バッテリー駆動時: 安全のためサスペンド
-    lidSwitch = "lock";
+    settings.Login.HandleLidSwitch = "lock";
   };
 
   # 3. 計測用ツール (Powertop) の導入
