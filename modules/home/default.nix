@@ -31,7 +31,7 @@
     google-chrome
     vscode
     nodejs_24
-  ];
+   ];
 
   home.sessionVariables = {
     EDITOR = "hx";

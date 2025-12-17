@@ -19,6 +19,8 @@
 
   # Packages
   home.packages = with pkgs; [
+    helix-gpt
+    nil
     # rust-analyzer (Rust開発用)
     # nodePackages.typescript-language-server (TypeScript開発用)
   ];

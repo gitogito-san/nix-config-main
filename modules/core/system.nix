@@ -26,7 +26,14 @@
   nixpkgs.config.allowUnfree = true;
 
   # --- Bluetooth & Network Base ---
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-l2tp
+      networkmanager-strongswan
+    ];
+  };
+  environment.etc."strongswan.conf".text = "";
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;

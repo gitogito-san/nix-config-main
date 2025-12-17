@@ -2,37 +2,62 @@
 
 {
   imports = [
-    # 1. ハードウェア設定 (同じフォルダ)
     ./hardware-configuration.nix
 
-    # 2. システム共通設定 (さっき作ったファイル)
     ../../modules/core/system.nix
     ../../modules/core/power-management.nix
     ../../modules/gui.nix  
-    
    ];
 
-  # --- Host Specific Settings ---
-  networking.hostName = "lifebook"; # ホスト名はここに書く
+  # Host
+  networking.hostName = "lifebook"; 
 
-  # --- Users ---
+  # SSH
+  services.openssh = {
+    enable = true;
+    openFirewall = false;
+  };
+
+  # Users
   users.users.ya = {
     isNormalUser = true;
     description = "ya";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "strongswan" "network" ];
     shell = pkgs.zsh;
   };
-  # システムレベルでzshを有効化
+  # Zsh
   programs.zsh.enable = true;
 
-  # --- System Packages (このPCで必要なもの) ---
+  # Fish
+  programs.fish.enable = true;
+
+  # System Packages
   environment.systemPackages = with pkgs; [
     git
-    # vim # 必要なら
+    age
   ];
 
-  # --- Hardware/Device Specific Rules ---
-  # キーボードの設定などはハードウェアに依存するのでここに残してOK
+  # Agenix
+  age.identityPaths = [ 
+    "/etc/ssh/ssh_host_ed25519_key"  
+    "/home/ya/.ssh/id_agenix"     
+  ];
+  age.secrets = {
+    copilotApiKey = {
+      file = ../../secrets/copilot-api-key.age;
+      owner = "ya";
+      group = "users";
+      mode = "400";
+    };
+    geminiApiKey = {
+      file = ../../secrets/gemini-api-key.age;
+      owner = "ya";
+      group = "users";
+      mode = "400";
+    };
+  };
+
+  # Hardware/Device Specific Rules
   services.udev.extraRules = ''
     # SayoDevice (ID: 8089)
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="8089", MODE="0666"
@@ -43,8 +68,10 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="4653", MODE="0666"
   '';
   
+  # Firmware
   hardware.enableRedistributableFirmware = true;
 
-  # 変更しないこと
+  # *DO NOT CHANGE*
   system.stateVersion = "25.11";
+
 }

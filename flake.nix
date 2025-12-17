@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
     nixosConfigurations = {
       lifebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -18,6 +22,7 @@
         modules = [
           ./hosts/lifebook/default.nix
           home-manager.nixosModules.default
+          agenix.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;
