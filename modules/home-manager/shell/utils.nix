@@ -2,10 +2,27 @@
 
 {
   home.packages = with pkgs; [
-    neofetch
-    btop
+    bottom
     bat
-    # ripgrep # 推奨: grepのモダンな代替
-    # eza     # 推奨: lsのモダンな代替
+    # ripgrep
+    # eza
+    # zoxide
+    # pay-respects
+    # yazi
+    # zellij
+    # skim
+    # yazi
+    # lazygit
+    # delta
+    # gh
+    # starship
+    # bandwhich
+    # du-dust
+    # procs
+    # fastfetch
+    # fd
+    # tealdeer
+    # atuin
+    # navi
   ];
 }

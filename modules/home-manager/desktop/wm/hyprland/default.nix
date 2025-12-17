@@ -3,7 +3,6 @@
 {
   # packages
   home.packages = with pkgs; [
-    # GUI必須
     alacritty
     fuzzel
     waybar
@@ -12,36 +11,34 @@
     networkmanagerapplet
     wlogout
     hyprpaper
-    xfce.thunar          # 本体
-    xfce.thunar-volman   # USBメモリ等の自動マウント管理 (あると便利)
-    xfce.thunar-archive-plugin # 圧縮・解凍プラグイン (あると便利)
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
     blueman
     wayvnc
 
-    # クリップボード・スクショ・ロック画面
-    wl-clipboard  # wl-copy / wl-paste
-    cliphist      # クリップボード履歴
-    grim          # スクリーンショット
-    slurp         # 範囲選択
-    swaylock-effects # ロック画面 (swaylockより高機能)
-    jq            # JSON処理 (スクショスクリプトで使用)
-    zenity        # ファイル保存ダイアログ (スクショスクリプトで使用)
+    wl-clipboard
+    cliphist
+    grim
+    slurp
+    swaylock-effects
+    jq
+    zenity
 
-    # 音量・輝度
     playerctl
     brightnessctl
     wireplumber
   ];
 
-  # 2. Hyprland 設定
+  # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    
+
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
-      "$menu" = "fuzzel --hide-before-typing --lines 3 --width 40"; 
-      
+      "$menu" = "fuzzel --hide-before-typing --lines 3 --width 40";
+
       monitor = ",preferred,auto,1";
 
       exec-once = [
@@ -56,12 +53,12 @@
         "blueman-applet"
       ];
 
-      # 環境変数
+      # env variables
       env = [
         "XCURSOR_SIZE,24"
       ];
 
-      # 外観 (General)
+      # General
       general = {
         gaps_in = 5;
         gaps_out = 20;
@@ -72,21 +69,21 @@
         layout = "dwindle";
       };
 
-      # 装飾 (Decoration)
+      # Decoration
       decoration = {
         rounding = 10;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         fullscreen_opacity = 1.0;
         blur = {
-        enabled = false;
+          enabled = false;
         };
       };
       animations = {
         enabled = false;
       };
 
-      # 入力設定 (US配列)
+      # input
       input = {
         kb_layout = "jp";
         repeat_rate = 50;
@@ -98,7 +95,7 @@
         };
       };
 
-      # ウィンドウルール
+      # winwindowrule
       windowrule = [
         "float, class:^(org.pulseaudio.pavucontrol)$"
         "float, class:^(xdg-desktop-portal-gtk)$"
@@ -108,12 +105,9 @@
         "center, class:^(.blueman-manager-wrapped)$"
       ];
 
-      # ==========================================
-      # ⌨️ キーバインド (メイン機 + HJKL移動)
-      # ==========================================
+      # bind
       bind = [
-        # アプリ起動
-        "$mainMod, RETURN, exec, $terminal" 
+        "$mainMod, RETURN, exec, $terminal"
         "$mainMod, Q, killactive,"
         "$mainMod, T, exec, thunar"
         "$mainMod, R, exec, $menu"
@@ -121,20 +115,17 @@
         "$mainMod, E, exec, wlogout"
         "$mainMod, V, exec, cliphist list | fuzzel -d -w 80% | cliphist decode | wl-copy"
         "$mainMod, M, exit,"
-        
-        # --- ウィンドウ移動 ---
+
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
 
-        # --- ウィンドウ入れ替え ---
         "$mainMod SHIFT, left, movewindow, l"
         "$mainMod SHIFT, right, movewindow, r"
         "$mainMod SHIFT, up, movewindow, u"
         "$mainMod SHIFT, down, movewindow, d"
 
-        # --- ワークスペース ---
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"
@@ -157,30 +148,30 @@
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-        # --- スクリーンショット ---
+        # screenshot
         ", Print, exec, bash -c 'FILEPATH=$(zenity --file-selection --save --confirm-overwrite --filename=\"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S_active.png)\"); [ -n \"$FILEPATH\" ] && grim -g \"$(hyprctl activewindow -j | jq -r \"\\(.at[0]),\\(.at[1]) \\(.size[0])x\\(.size[1])\")\" \"$FILEPATH\"'"
         "SHIFT, Print, exec, bash -c 'FILEPATH=$(zenity --file-selection --save --confirm-overwrite --filename=\"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S_all.png)\"); [ -n \"$FILEPATH\" ] && grim \"$FILEPATH\"'"
         "$mainMod, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
 
-        # --- その他 ---
+        # window change rule
         "$mainMod, F, fullscreen"
         "$mainMod, space, togglefloating"
-    
-        # --- リサイズ ---
+
+        # resize
         "$mainMod CTRL, left, resizeactive, -40 0"
         "$mainMod CTRL, right, resizeactive, 40 0"
         "$mainMod CTRL, up, resizeactive, 0 -40"
         "$mainMod CTRL, down, resizeactive, 0 40"
       ];
 
-      # メディアコントロール (binde / bindl)
+      # binde / bindl
       binde = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
       ];
-      
+
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
