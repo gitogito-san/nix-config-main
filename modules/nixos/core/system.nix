@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  # Bootloader 
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -22,7 +22,10 @@
   console.keyMap = "jp106";
 
   # Nix Settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   # Optimization
@@ -32,5 +35,5 @@
     options = "--delete-older-than 7d";
   };
   nix.settings.auto-optimise-store = true;
-  
+
 }

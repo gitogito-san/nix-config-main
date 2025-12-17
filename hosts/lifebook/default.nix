@@ -14,7 +14,7 @@
   ];
 
   # Host
-  networking.hostName = "lifebook"; 
+  networking.hostName = "lifebook";
 
   # System Packages
   environment.systemPackages = with pkgs; [
@@ -22,7 +22,7 @@
   ];
 
   # Firmware
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
   # *DO NOT CHANGE*
   system.stateVersion = "25.11";
