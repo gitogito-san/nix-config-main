@@ -15,13 +15,27 @@
         default-yank-register = "+";
         };
     };
+
+  # LSP
+  languages = {
+      language-server.gpt = {
+        command = "helix-gpt";
+        args = [ "--handler" "copilot" ]; 
+      };
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          language-servers = [ "nil" ];
+        }
+      ];
+    };
   };
 
   # Packages
   home.packages = with pkgs; [
     helix-gpt
     nil
-    # rust-analyzer (Rust開発用)
-    # nodePackages.typescript-language-server (TypeScript開発用)
+    typos-lsp
   ];
 }

@@ -3,10 +3,10 @@
 {
   home.username = "ya";
   home.homeDirectory = "/home/ya";
+
+  # *DO NOT CHANGE*
   home.stateVersion = "25.11";
 
-  # ★ ここが「最強」のポイント：
-  # 自動読み込みをやめ、何を使っているかを明示的に書く！
   imports = [
     # CLI / Shell
     ../features/cli/zsh.nix
@@ -20,7 +20,7 @@
     ../features/apps/helix.nix
   ];
 
-  # 共通パッケージ
+  # Packages
   home.packages = with pkgs; [
     neofetch
     btop
@@ -31,13 +31,13 @@
     google-chrome
     vscode
     nodejs_24
-   ];
+  ];
 
   home.sessionVariables = {
     EDITOR = "hx";
     VISUAL = "hx";
   };
-  
-  # Home Manager自体の管理を有効化
+
+  # Home Manager
   programs.home-manager.enable = true;
 }
