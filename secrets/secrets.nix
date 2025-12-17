@@ -3,6 +3,6 @@ let
   system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAVtf69MhvtfaLSmrWdzo3enNdPDpCuSPUpGWqBV64b3 root@lifebook";
 in
 {
-  "secrets/copilot-api-key.age".publicKeys = [ user system ];
-  "secrets/gemini-api-key.age".publicKeys = [ user system ];
+  "./copilot-api-key.age".publicKeys = [ user system ];
+  "./gemini-api-key.age".publicKeys = [ user system ];
 }

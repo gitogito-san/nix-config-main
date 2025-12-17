@@ -35,7 +35,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.ya = ./modules/home/default.nix;
+                users.ya = ./home/ya;
               };
             }
           ];

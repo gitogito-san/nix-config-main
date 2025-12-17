@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 {
-  # --- Bootloader ---
+  # Bootloader 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # --- Localization ---
+  # Localization
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "ja_JP.UTF-8";
   i18n.extraLocaleSettings = {
@@ -21,23 +21,16 @@
   };
   console.keyMap = "jp106";
 
-  # --- Nix Settings ---
+  # Nix Settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  # --- Bluetooth & Network Base ---
-  networking.networkmanager = {
-    enable = true;
-    plugins = with pkgs; [
-      networkmanager-l2tp
-      networkmanager-strongswan
-    ];
+  # Optimization
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
-  environment.etc."strongswan.conf".text = "";
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
+  nix.settings.auto-optimise-store = true;
   
-  # Tailscale (全PCで使うならここ)
-  services.tailscale.enable = true;
 }
