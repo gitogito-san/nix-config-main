@@ -54,9 +54,7 @@
       ];
 
       # env variables
-      env = [
-        "XCURSOR_SIZE,24"
-      ];
+      env = [ ];
 
       # General
       general = {
