@@ -2,15 +2,6 @@
 
 let
   font = "Hack Nerd Font";
-  colors = {
-    background = "#1a1b26";
-    backgroundAlt = "#24283b";
-    foreground = "#c0caf5";
-    primary = "#7aa2f7";
-    secondary = "#bb9af7";
-    alert = "#f7768e";
-    disabled = "#565f89";
-  };
 in
 
 {
@@ -167,22 +158,18 @@ in
 
     style = ''
       * {
-        border: none;
-        border-radius: 0;
-        font-family: "${font}";
-        font-size: 13px;
-        min-height: 0;
+      border: none;
+      border-radius: 0;
+      font-family: "${font}";
+      min-height: 0;
       }
 
       window#waybar {
-        background: ${colors.background};
-        color: ${colors.foreground};
         opacity: 0.95; 
       }
 
       window#waybar.bottombar {
         opacity: 0.90;
-        font-size: 11px; 
       }
 
       #workspaces {
@@ -191,30 +178,7 @@ in
 
       #workspaces button {
         padding: 0 4px;
-        color: ${colors.primary};
-        font-size: 10px;
         transition: all 0.2s ease-in-out; 
-      }
-
-      #workspaces button:hover {
-        color: ${colors.foreground};
-        background-color: rgba(255, 255, 255, 0.1); 
-        box-shadow: inset 0 -1px 0 ${colors.foreground}; 
-      }
-
-      #workspaces button.active {
-        color: ${colors.secondary};
-        background-color: transparent;
-        border-bottom: 1px solid ${colors.secondary}; 
-      }
-
-      #workspaces button.urgent {
-        color: ${colors.alert};
-        background-color: rgba(247, 118, 142, 0.2); 
-      }
-
-      #workspaces button.persistent {
-        color: ${colors.disabled};
       }
 
       #clock,
@@ -231,23 +195,18 @@ in
       #custom-power {
         padding: 0 6px;
         margin: 0;
-        color: ${colors.foreground};
       }
 
       #clock {
-        color: ${colors.secondary};
         font-weight: bold;
       }
 
-      #wireplumber { color: ${colors.primary}; } 
-      #wireplumber.muted { color: ${colors.disabled}; }
 
       #battery.charging, #battery.plugged {
         color: #9ece6a;
       }
 
       #battery.critical:not(.charging) {
-        color: ${colors.alert};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-iteration-count: infinite;
@@ -262,12 +221,7 @@ in
         color: #9ece6a;
       }
 
-      #network {
-        color: ${colors.primary};
-      }
-
       #custom-power {
-        color: ${colors.alert};
         margin-right: 10px; 
       }
 

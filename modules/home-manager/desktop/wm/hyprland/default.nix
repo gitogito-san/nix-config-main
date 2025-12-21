@@ -44,7 +44,6 @@ in
     pkgs.dunst
     pkgs.networkmanagerapplet
     pkgs.wlogout
-    pkgs.hyprpaper
     pkgs.xfce.thunar
     pkgs.xfce.thunar-volman
     pkgs.xfce.thunar-archive-plugin
@@ -75,12 +74,12 @@ in
       monitor = ",preferred,auto,1";
 
       exec-once = [
-        "${pkgs.hyprpaper}/bin/hyprpaper"
+        "swww-daemon"
         "${pkgs.waybar}/bin/waybar"
         "fcitx5 -d"
         "${pkgs.dunst}/bin/dunst"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
-        "${pkgs.blueman}/bin/blueman-applet &"
+        "${pkgs.blueman}/bin/blueman-applet"
         "mkdir -p $HOME/Pictures/Screenshots"
         "${wlPaste} --type text --watch ${cliphist} store"
         "${wlPaste} --type image --watch ${cliphist} store"
@@ -94,8 +93,6 @@ in
         gaps_in = 2;
         gaps_out = 2;
         border_size = 2;
-        "col.active_border" = "rgba(888888ff)";
-        "col.inactive_border" = "rgba(333333ff)";
         resize_on_border = true;
         layout = "dwindle";
       };

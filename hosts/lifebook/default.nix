@@ -6,6 +6,7 @@
     ../../modules/nixos/core
     ../../modules/nixos/hardware/keyboards.nix
     ../../modules/nixos/hardware/power-management.nix
+    ../../modules/nixos/desktop/stylix.nix
     ../../modules/nixos/desktop/wm/hyprland
     ../../modules/nixos/desktop/dm/ly.nix
     ../../modules/nixos/desktop/fonts.nix

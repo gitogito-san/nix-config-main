@@ -7,7 +7,6 @@
     defaultEditor = true;
 
     settings = {
-      theme = "jellybeans";
       editor = {
         line-number = "relative";
         cursorline = true;

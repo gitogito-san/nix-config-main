@@ -11,6 +11,7 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix.url = "github:danth/stylix";
   };
 
   outputs =
@@ -19,6 +20,7 @@
       nixpkgs,
       home-manager,
       agenix,
+      stylix,
       ...
     }@inputs:
     {
@@ -30,6 +32,7 @@
             ./hosts/lifebook/default.nix
             home-manager.nixosModules.default
             agenix.nixosModules.default
+            stylix.nixosModules.stylix
             {
               home-manager = {
                 useGlobalPkgs = true;
