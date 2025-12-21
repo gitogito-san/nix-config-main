@@ -40,7 +40,6 @@ in
   home.packages = [
     pkgs.alacritty
     pkgs.fuzzel
-    pkgs.waybar
     pkgs.dunst
     pkgs.networkmanagerapplet
     pkgs.wlogout
@@ -205,8 +204,6 @@ in
       bindl = [
         ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioMicMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", switch:on:Lid Switch, exec, ${pkgs.hyprland}/bin/hyprctl dispatch dpms off"
-        ", switch:off:Lid Switch, exec, ${pkgs.hyprland}/bin/hyprctl dispatch dpms on"
       ];
     };
   };

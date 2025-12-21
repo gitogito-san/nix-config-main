@@ -5,6 +5,7 @@
     ../../modules/home-manager/shell/utils.nix
     ../../modules/home-manager/tui/helix.nix
     ../../modules/home-manager/tui/ssh.nix
+    ../../modules/home-manager/desktop/addons/waybar.nix
     ../../modules/home-manager/desktop/apps.nix
     ../../modules/home-manager/desktop/cursor.nix
     ../../modules/home-manager/desktop/wm/hyprland

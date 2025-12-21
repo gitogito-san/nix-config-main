@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # counter TLP conflict
   services.power-profiles-daemon.enable = false;
-  services.auto-cpufreq.enable = false; 
+  services.auto-cpufreq.enable = false;
 
   # TLP
   services.tlp = {
@@ -21,17 +21,19 @@
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "on";
 
-      USB_AUTOSUSPEND = 1; 
+      USB_AUTOSUSPEND = 1;
       USB_EXCLUDE_PHONE = 1;
     };
   };
 
-  services.logind = {
-    settings.Login.HandleLidSwitch = "lock";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "lock";
+    HandleLidSwitchDocked = "ignore";
   };
 
   # packages
-  environment.systemPackages = with pkgs; [
-    powertop
+  environment.systemPackages = [
+    pkgs.powertop
   ];
 }
