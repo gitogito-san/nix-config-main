@@ -45,7 +45,7 @@ in
 
         "wireplumber" = {
           format = "{volume}% {icon}";
-          format-muted = " Muted";
+          format-muted = "󰝟";
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
           format-icons = [
             ""

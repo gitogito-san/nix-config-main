@@ -1,12 +1,12 @@
 {
   imports = [
     ../../modules/home-manager/core
-    ../../modules/home-manager/shell/zsh.nix
     ../../modules/home-manager/shell/fish.nix
-    ../../modules/home-manager/shell/utils.nix
     ../../modules/home-manager/shell/starship.nix
     ../../modules/home-manager/tui/helix.nix
     ../../modules/home-manager/tui/ssh.nix
+    ../../modules/home-manager/cli/git.nix
+    ../../modules/home-manager/cli/modern.nix
     ../../modules/home-manager/desktop/addons/waybar.nix
     ../../modules/home-manager/desktop/apps.nix
     ../../modules/home-manager/desktop/cursor.nix

@@ -22,10 +22,13 @@
   console.keyMap = "jp106";
 
   # Nix Settings
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    warn-dirty = false;
+  };
   nixpkgs.config.allowUnfree = true;
 
   # Optimization

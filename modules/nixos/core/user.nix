@@ -2,7 +2,6 @@
 
 {
   # Shells
-  programs.zsh.enable = true;
   programs.fish.enable = true;
 
   # User Definition
