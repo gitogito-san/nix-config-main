@@ -4,9 +4,9 @@
   # Network Manager
   networking.networkmanager = {
     enable = true;
-    plugins = with pkgs; [
-      networkmanager-l2tp
-      networkmanager-strongswan
+    plugins = [
+      pkgs.networkmanager-l2tp
+      pkgs.networkmanager-strongswan
     ];
   };
 
@@ -17,8 +17,8 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-  
+
   # Tailscale
   services.tailscale.enable = true;
-  
+
 }

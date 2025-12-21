@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    firefox
-    google-chrome
-    discord
-    vial
+  home.packages = [
+    pkgs.firefox
+    pkgs.google-chrome
+    pkgs.discord
+    pkgs.vial
   ];
-  
+
 }

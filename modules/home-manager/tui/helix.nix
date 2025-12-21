@@ -79,10 +79,10 @@
   };
 
   # Packages
-  home.packages = with pkgs; [
-    helix-gpt
-    nil
-    typos-lsp
-    nixfmt-rfc-style
+  home.packages = [
+    pkgs.helix-gpt
+    pkgs.nil
+    pkgs.nixfmt-rfc-style
+    pkgs.typos-lsp
   ];
 }

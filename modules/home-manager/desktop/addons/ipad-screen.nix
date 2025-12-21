@@ -29,10 +29,10 @@ let
 
   stop-ipad = pkgs.writeShellScriptBin "stop-ipad" ''
     echo "Stopping iPad screen..."
-    
+
     pkill waybar || true
     pkill wayvnc || true
-    
+
     HEADLESS_NAME=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq -r '.[] | select(.name | startswith("HEADLESS")) | .name' | head -n1)
     MAIN_MONITOR=$(hyprctl -j monitors | ${pkgs.jq}/bin/jq -r '.[] | select(.name | startswith("HEADLESS") | not) | .name' | head -n1)
 
@@ -63,5 +63,11 @@ let
 
 in
 {
-  home.packages = [ start-ipad stop-ipad pkgs.jq pkgs.iproute2 pkgs.gnugrep ];
+  home.packages = [
+    start-ipad
+    stop-ipad
+    pkgs.jq
+    pkgs.iproute2
+    pkgs.gnugrep
+  ];
 }

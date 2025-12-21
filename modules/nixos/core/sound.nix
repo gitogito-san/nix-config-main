@@ -13,9 +13,9 @@
   security.rtkit.enable = true;
 
   # packages
-  environment.systemPackages = with pkgs; [
-    sof-firmware
-    alsa-utils
-    pavucontrol
+  environment.systemPackages = [
+    pkgs.sof-firmware
+    pkgs.alsa-utils
+    pkgs.pavucontrol
   ];
 }
