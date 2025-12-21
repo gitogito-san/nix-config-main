@@ -17,13 +17,12 @@ in
   programs.waybar = {
     enable = true;
     settings = [
-      # Top Bar
       {
         name = "topbar";
         layer = "top";
         position = "top";
         height = 10;
-        spacing = 5;
+        spacing = 10;
 
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
@@ -111,13 +110,12 @@ in
         };
       }
 
-      # Bottom Bar
       {
         name = "bottombar";
         layer = "top";
         position = "bottom";
         height = 10;
-        spacing = 5;
+        spacing = 10;
 
         modules-left = [ "mpris" ];
         modules-center = [ "hyprland/window" ];
@@ -156,6 +154,7 @@ in
           format-ethernet = "{ipaddr} ";
           format-disconnected = "⚠ Disconnected";
           tooltip-format = "{ifname} via {gwaddr}";
+          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
         };
 
         "custom/power" = {
