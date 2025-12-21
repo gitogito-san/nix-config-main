@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
+    niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs =
@@ -21,6 +22,7 @@
       home-manager,
       agenix,
       stylix,
+      niri,
       ...
     }@inputs:
     {
@@ -34,6 +36,7 @@
             home-manager.nixosModules.default
             agenix.nixosModules.default
             stylix.nixosModules.stylix
+            niri.nixosModules.niri
             {
               home-manager = {
                 useGlobalPkgs = true;

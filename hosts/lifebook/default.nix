@@ -8,7 +8,8 @@
     ../../modules/nixos/hardware/power-management.nix
     ../../modules/nixos/desktop/stylix.nix
     ../../modules/nixos/desktop/wm/hyprland
-    ../../modules/nixos/desktop/dm/ly.nix
+    ../../modules/nixos/desktop/wm/niri.nix
+    ../../modules/nixos/desktop/dm/greetd.nix
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/addons/fcitx5.nix
     ../../modules/nixos/services/openssh.nix

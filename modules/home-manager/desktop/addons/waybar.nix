@@ -56,10 +56,11 @@ in
 
         "cpu" = {
           format = "CPU {usage}% ";
-          interval = 2;
+          interval = 5;
         };
 
         "temperature" = {
+          interval = 30;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = [
@@ -71,15 +72,17 @@ in
 
         "memory" = {
           format = "Mem {}% ";
-          interval = 2;
+          interval = 30;
         };
 
         "disk" = {
+          interval = 600;
           format = "Disk {percentage_used}% ";
           path = "/";
         };
 
         "battery" = {
+          interval = 60;
           states = {
             warning = 30;
             critical = 15;
