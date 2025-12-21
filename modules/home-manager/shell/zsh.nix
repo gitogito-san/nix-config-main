@@ -7,12 +7,15 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    
+
     # Oh My Zsh
     oh-my-zsh = {
       enable = true;
       theme = "nicoulaj";
-      plugins = [ "git" "sudo" ];
+      plugins = [
+        "git"
+        "sudo"
+      ];
     };
 
     # Aliases
@@ -20,19 +23,18 @@
       l = "ls -a";
       del = "clear";
       update = "sudo nixos-rebuild switch --flake /etc/nixos#lifebook";
-      gemini = "npx @google/gemini-cli";
     };
 
     # Agenix
     initContent = ''
-    if [ -f /run/agenix/copilotApiKey ]; then
-      export COPILOT_API_KEY="$(cat /run/agenix/copilotApiKey)"
-    fi
+      if [ -f /run/agenix/copilotApiKey ]; then
+        export COPILOT_API_KEY="$(cat /run/agenix/copilotApiKey)"
+      fi
 
-    if [ -f /run/agenix/geminiApiKey ]; then
-      export GEMINI_API_KEY="$(cat /run/agenix/geminiApiKey)"
-    fi
-  '';
+      if [ -f /run/agenix/geminiApiKey ]; then
+        export GEMINI_API_KEY="$(cat /run/agenix/geminiApiKey)"
+      fi
+    '';
   };
 
   # Git
@@ -43,7 +45,7 @@
       user.email = "gitogitohub@gmail.com";
     };
   };
-  
+
   # Direnv
   programs.direnv = {
     enable = true;

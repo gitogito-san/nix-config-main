@@ -12,6 +12,7 @@ let
   grim = "${pkgs.grim}/bin/grim";
   slurp = "${pkgs.slurp}/bin/slurp";
   wlCopy = "${pkgs.wl-clipboard}/bin/wl-copy";
+  wlPaste = "${pkgs.wl-clipboard}/bin/wl-paste";
   cliphist = "${pkgs.cliphist}/bin/cliphist";
   zenity = "${pkgs.zenity}/bin/zenity";
 
@@ -81,7 +82,8 @@ in
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet &"
         "mkdir -p $HOME/Pictures/Screenshots"
-        "${wlCopy} --watch ${cliphist} store &"
+        "${wlPaste} --type text --watch ${cliphist} store"
+        "${wlPaste} --type image --watch ${cliphist} store"
       ];
 
       # env variables

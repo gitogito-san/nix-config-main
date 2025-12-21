@@ -1,9 +1,10 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    bottom
-    bat
+  home.packages = [
+    pkgs.bottom
+    pkgs.bat
+    pkgs.gemini-cli
     # ripgrep
     # eza
     # zoxide

@@ -9,7 +9,13 @@
   users.users.ya = {
     isNormalUser = true;
     description = "ya";
-    extraGroups = [ "networkmanager" "wheel" "input" "strongswan" "network" ];
-    shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "strongswan"
+      "network"
+    ];
+    shell = pkgs.fish;
   };
 }
