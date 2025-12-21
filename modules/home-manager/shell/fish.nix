@@ -3,6 +3,7 @@
 {
   programs.fish = {
     enable = true;
+
     shellAbbrs = {
       l = "ls -a";
       del = "clear";

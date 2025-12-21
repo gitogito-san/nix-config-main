@@ -21,7 +21,7 @@ in
         name = "topbar";
         layer = "top";
         position = "top";
-        height = 10;
+        height = 15;
         spacing = 10;
 
         modules-left = [ "hyprland/workspaces" ];
@@ -115,7 +115,7 @@ in
         layer = "top";
         position = "bottom";
         height = 10;
-        spacing = 10;
+        spacing = 15;
 
         modules-left = [ "mpris" ];
         modules-center = [ "hyprland/window" ];

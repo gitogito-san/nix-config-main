@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   # Zsh
@@ -37,19 +37,4 @@
     '';
   };
 
-  # Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "ya";
-      user.email = "gitogitohub@gmail.com";
-    };
-  };
-
-  # Direnv
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    enableZshIntegration = true;
-  };
 }
