@@ -5,7 +5,6 @@ let
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   fileManager = "${pkgs.xfce.thunar}/bin/thunar";
   lock = "${pkgs.swaylock-effects}/bin/swaylock";
-  logout = "${pkgs.wlogout}/bin/wlogout";
 
   # Tools
   jq = "${pkgs.jq}/bin/jq";
@@ -39,7 +38,6 @@ in
 {
   # packages
   home.packages = [
-    pkgs.alacritty
     pkgs.fuzzel
     pkgs.dunst
     pkgs.networkmanagerapplet
@@ -61,6 +59,14 @@ in
     pkgs.brightnessctl
     pkgs.wireplumber
   ];
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window = {
+        decorations = "None";
+      };
+    };
+  };
 
   # Hyprland
   wayland.windowManager.hyprland = {
@@ -114,8 +120,8 @@ in
       # input
       input = {
         kb_layout = "jp";
-        repeat_rate = 50;
-        repeat_delay = 300;
+        repeat_rate = 40;
+        repeat_delay = 250;
         touchpad = {
           natural_scroll = true;
           drag_lock = true;
@@ -140,7 +146,6 @@ in
         "$mainMod, T, exec, ${fileManager}"
         "$mainMod, R, exec, $menu"
         "$mainMod, L, exec, ${lock} -f --screenshots --clock --effect-blur 7x5 --indicator --fade-in 0.5 --font 'Noto Sans CJK JP'"
-        "$mainMod, E, exec, ${logout}"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"
         "$mainMod, M, exit,"
 

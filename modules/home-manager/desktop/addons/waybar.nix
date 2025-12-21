@@ -15,7 +15,10 @@ in
         height = 15;
         spacing = 10;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "niri/workspaces"
+        ];
         modules-center = [ "clock" ];
         modules-right = [
           "wireplumber"
@@ -28,13 +31,18 @@ in
         ];
 
         "hyprland/workspaces" = {
-          disable-scroll = true;
-          all-outputs = true;
+          format = "{icon}";
+          on-click = "activate";
+          "active" = "●";
+          "default" = "○";
+          "urgent" = "";
+        };
+
+        "niri/workspaces" = {
           format = "{icon}";
           format-icons = {
-            "active" = "";
-            "default" = "";
-            "urgent" = "";
+            default = "○";
+            active = "●";
           };
         };
 
@@ -60,7 +68,7 @@ in
         };
 
         "temperature" = {
-          interval = 30;
+          interval = 10;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = [
@@ -72,7 +80,7 @@ in
 
         "memory" = {
           format = "Mem {}% ";
-          interval = 30;
+          interval = 10;
         };
 
         "disk" = {
@@ -82,7 +90,7 @@ in
         };
 
         "battery" = {
-          interval = 60;
+          interval = 30;
           states = {
             warning = 30;
             critical = 15;

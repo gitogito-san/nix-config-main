@@ -35,7 +35,7 @@ in
   home.pointerCursor = {
     package = stableReticleTheme;
     name = variantName;
-    size = 24;
+    size = 18;
     gtk.enable = true;
     x11.enable = true;
   };
