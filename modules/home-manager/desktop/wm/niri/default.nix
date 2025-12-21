@@ -14,6 +14,8 @@
       }
     ];
     layout = {
+      center-focused-column = "never";
+
       focus-ring = {
         enable = true;
         width = 3;
@@ -32,12 +34,14 @@
         { proportion = 0.666666666666666; }
         { proportion = 1.0; }
       ];
-      "center-focused-column" = "never";
     };
 
     input = {
       keyboard = {
-        xkb.layout = "jp";
+        xkb = {
+          layout = "jp";
+          options = "caps:none";
+        };
         repeat-delay = 250;
         repeat-rate = 40;
       };
@@ -134,6 +138,8 @@
         "Mod+Return".action = spawn "${pkgs.alacritty}/bin/alacritty";
         "Mod+Q".action = close-window;
         "Mod+T".action = spawn "${pkgs.xfce.thunar}/bin/thunar";
+        "Mod+E".action = spawn "${pkgs.wlogout}/bin/wlogout";
+        "Mod+L".action = spawn "${pkgs.swaylock-effects}/bin/swaylock";
         "Mod+R".action.spawn = [
           "${pkgs.fuzzel}/bin/fuzzel"
           "--hide-before-typing"

@@ -1,4 +1,16 @@
 { pkgs, ... }:
+let
+  sessionDir = pkgs.linkFarm "wayland-sessions" [
+    {
+      name = "niri.desktop";
+      path = "${pkgs.niri}/share/wayland-sessions/niri.desktop";
+    }
+    {
+      name = "hyprland.desktop";
+      path = "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
+    }
+  ];
+in
 
 {
   services.greetd = {
@@ -10,7 +22,7 @@
             --time \
             --remember \
             --remember-session \
-            --sessions ${pkgs.hyprland}/share/wayland-sessions:${pkgs.niri}/share/wayland-sessions
+            --sessions ${sessionDir}
         '';
         user = "greeter";
       };
@@ -21,6 +33,8 @@
     pkgs.niri
     pkgs.hyprland
   ];
+
+  services.xserver.displayManager.startx.enable = false;
 
   systemd.services.greetd.serviceConfig = {
     Type = "idle";

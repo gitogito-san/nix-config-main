@@ -3,9 +3,9 @@
 {
   environment.systemPackages = [ pkgs.age ];
 
-  age.identityPaths = [ 
-    "/etc/ssh/ssh_host_ed25519_key"  
-    "/home/ya/.ssh/id_agenix"     
+  age.identityPaths = [
+    "/etc/ssh/ssh_host_ed25519_key"
+    "/home/ya/.ssh/id_agenix"
   ];
 
   age.secrets = {

@@ -59,12 +59,22 @@ in
     pkgs.brightnessctl
     pkgs.wireplumber
   ];
+
   programs.alacritty = {
     enable = true;
     settings = {
       window = {
         decorations = "None";
       };
+    };
+  };
+
+  # lock password
+  services.swayidle = {
+    enable = true;
+    events = {
+      lock = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033";
+      before-sleep = "${pkgs.swaylock-effects}/bin/swaylock -f";
     };
   };
 
@@ -145,6 +155,7 @@ in
         "$mainMod, Q, killactive,"
         "$mainMod, T, exec, ${fileManager}"
         "$mainMod, R, exec, $menu"
+        "$mainMod, E, exec, ${pkgs.wlogout}/bin/wlogout"
         "$mainMod, L, exec, ${lock} -f --screenshots --clock --effect-blur 7x5 --indicator --fade-in 0.5 --font 'Noto Sans CJK JP'"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"
         "$mainMod, M, exit,"

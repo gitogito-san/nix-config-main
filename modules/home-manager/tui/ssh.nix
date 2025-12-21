@@ -1,29 +1,28 @@
-
 { config, pkgs, ... }:
 
 {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    
+
     matchBlocks = {
       "*" = {
         serverAliveInterval = 60;
         serverAliveCountMax = 5;
       };
-      
+
       ya = {
         hostname = "100.90.113.106";
-#        port = 22;
+        #        port = 22;
         user = "ya";
-        identityFile = "~/.ssh/id_main_minipc"; 
+        identityFile = "~/.ssh/id_main_minipc";
       };
 
       "github.com" = {
-        user = "git"; 
-        identityFile = "~/.ssh/github_ssh"; 
+        user = "git";
+        identityFile = "~/.ssh/github_ssh";
       };
-      
+
       sol = {
         hostname = "sol.cc.uec.ac.jp";
         user = "y2511246";

@@ -2,6 +2,7 @@
 
 {
   # counter TLP conflict
+  systemd.services.NetworkManager-wait-online.enable = false;
   services.power-profiles-daemon.enable = false;
   services.auto-cpufreq.enable = false;
 
@@ -19,10 +20,15 @@
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
       WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
+      WIFI_PWR_ON_BAT = "off";
 
       USB_AUTOSUSPEND = 1;
       USB_EXCLUDE_PHONE = 1;
+
+      PCIE_ASPM_ON_AC = "performance";
+      DEVICES_TO_ENABLE_ON_STARTUP = "wifi";
+      RESTORE_DEVICE_STATE_ON_STARTUP = 0;
+      DEVICES_TO_DISABLE_ON_STARTUP = "";
     };
   };
 
@@ -36,4 +42,14 @@
   environment.systemPackages = [
     pkgs.powertop
   ];
+
+  fileSystems."/boot" = {
+    options = [
+      "umask=0077"
+      "noauto"
+      "x-systemd.automount"
+    ];
+  };
+
+  security.pam.services.swaylock = { };
 }
