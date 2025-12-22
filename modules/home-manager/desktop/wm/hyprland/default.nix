@@ -38,7 +38,6 @@ in
 {
   # packages
   home.packages = [
-    pkgs.fuzzel
     pkgs.dunst
     pkgs.networkmanagerapplet
     pkgs.wlogout

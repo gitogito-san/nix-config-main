@@ -10,6 +10,7 @@
     ../../modules/home-manager/desktop/addons/waybar.nix
     ../../modules/home-manager/desktop/apps.nix
     ../../modules/home-manager/desktop/cursor.nix
+    ../../modules/home-manager/desktop/fuzzel.nix
     ../../modules/home-manager/desktop/wm/hyprland
     ../../modules/home-manager/desktop/wm/niri
     ../../modules/home-manager/desktop/addons/ipad-screen.nix
