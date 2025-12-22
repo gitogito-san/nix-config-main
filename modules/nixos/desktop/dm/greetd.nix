@@ -9,6 +9,15 @@ let
       name = "hyprland.desktop";
       path = "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
     }
+    {
+      name = "fish.desktop";
+      path = pkgs.writeText "fish.desktop" ''
+        [Desktop Entry]
+        Name=Shell (Fish)
+        Exec=${pkgs.fish}/bin/fish
+        Type=Application
+      '';
+    }
   ];
 in
 

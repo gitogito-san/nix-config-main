@@ -1,4 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+  inputImage = ./nahida.jpg;
+  brightness = "-15";
+  contrast = "0";
+  fillColor = "black";
+in
 
 {
   environment.systemPackages = [ pkgs.swww ];
@@ -6,9 +12,13 @@
   stylix = {
     enable = true;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
 
-    image = ./nahida.jpg;
+    image = pkgs.runCommand "dimmed-background.png" { } ''
+      ${lib.getExe' pkgs.imagemagick "convert"} "${inputImage}" -brightness-contrast ${brightness},${contrast} -fill ${fillColor} $out
+    '';
+
+    polarity = "dark";
 
     fonts = {
       serif = {
@@ -25,8 +35,8 @@
       };
 
       sizes = {
-        applications = 11;
-        terminal = 11;
+        applications = 12;
+        terminal = 10;
         desktop = 10;
         popups = 10;
       };
