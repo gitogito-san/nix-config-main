@@ -1,15 +1,5 @@
+# .gitignore
 result
 result-*
-
-secrets/*.age
-
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.svg
-
 .direnv/
 .cache/
-
-.git/
