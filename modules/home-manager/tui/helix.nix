@@ -88,6 +88,9 @@
             "rust-analyzer"
             "typos"
           ];
+          formatter = {
+            command = "${pkgs.rustfmt}/bin/rustfmt";
+          };
         }
         {
           name = "c";
@@ -96,14 +99,19 @@
             "clangd"
             "typos"
           ];
+          formatter = {
+            command = "${pkgs.clang-tools}/bin/clang-format";
+          };
         }
         {
           name = "ruby";
           auto-format = true;
           language-servers = [
             "ruby-lsp"
-            "typos"
           ];
+          formatter = {
+            command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
+          };
         }
       ];
     };
@@ -115,5 +123,12 @@
     pkgs.nil
     pkgs.nixfmt-rfc-style
     pkgs.typos-lsp
+    pkgs.rust-analyzer
+    pkgs.rustfmt
+    pkgs.clang
+    pkgs.clang-tools
+    pkgs.ruby
+    pkgs.ruby-lsp
   ];
+
 }
