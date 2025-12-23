@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let
   inputImage = ./nahida.jpg;
-  brightness = "-15";
+  brightness = "-10";
   contrast = "0";
   fillColor = "black";
 in
@@ -51,4 +51,8 @@ in
 
   };
 
+  environment.sessionVariables = {
+    GDK_SCALE = "1";
+    GDK_DPI_SCALE = "1.0";
+  };
 }

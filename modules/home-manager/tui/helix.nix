@@ -28,16 +28,9 @@
       language-server = {
         nil = {
           command = "${pkgs.nil}/bin/nil";
-          config = {
-            nil = {
-              nix.flake = {
-                autoEvalInputs = true;
-                autoArchive = true;
-              };
-              formatting = {
-                command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
-              };
-            };
+          config.nil.nix.flake = {
+            autoEvalInputs = true;
+            autoArchive = true;
           };
         };
         gpt = {
@@ -53,19 +46,18 @@
         rust-analyzer = {
           command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
           config = {
-            checkOnSave = {
-              command = "clippy";
-            };
-            procMacro = {
-              enable = true;
-            };
+            checkOnSave.command = "clippy";
+            procMacro.enable = true;
           };
         };
         clangd = {
           command = "${pkgs.clang-tools}/bin/clangd";
         };
         ruby-lsp = {
-          command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
+          command = "ruby-lsp";
+          config = {
+            bundleGemfile = "";
+          };
         };
       };
 
@@ -110,7 +102,8 @@
             "ruby-lsp"
           ];
           formatter = {
-            command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
+            command = "${pkgs.rufo}/bin/rufo";
+            args = [ "-p" ];
           };
         }
       ];
@@ -119,16 +112,6 @@
 
   # Packages
   home.packages = [
-    pkgs.helix-gpt
-    pkgs.nil
-    pkgs.nixfmt-rfc-style
-    pkgs.typos-lsp
-    pkgs.rust-analyzer
-    pkgs.rustfmt
-    pkgs.clang
-    pkgs.clang-tools
-    pkgs.ruby
-    pkgs.ruby-lsp
   ];
 
 }

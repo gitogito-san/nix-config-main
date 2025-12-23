@@ -110,6 +110,7 @@
           "0.0"
         ];
       }
+      { command = [ "${pkgs.fuzzel}/bin/fuzzel" ]; }
     ];
 
     binds =

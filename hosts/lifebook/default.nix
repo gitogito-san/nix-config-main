@@ -13,6 +13,7 @@
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/addons/fcitx5.nix
     ../../modules/nixos/services/openssh.nix
+    ../../modules/nixos/services/ollama.nix
   ];
 
   # Host
