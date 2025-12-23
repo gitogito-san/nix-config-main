@@ -39,6 +39,13 @@
       icon = "firefox";
       categories = [ "Education" ];
     })
+    (pkgs.makeDesktopItem {
+      name = "gemini";
+      desktopName = "gemini";
+      exec = "firefox https://gemini.google.com";
+      icon = "firefox";
+      categories = [ "Education" ];
+    })
   ];
 
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Helix
@@ -50,6 +50,23 @@
         typos = {
           command = "${pkgs.typos-lsp}/bin/typos-lsp";
         };
+        rust-analyzer = {
+          command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+          config = {
+            checkOnSave = {
+              command = "clippy";
+            };
+            procMacro = {
+              enable = true;
+            };
+          };
+        };
+        clangd = {
+          command = "${pkgs.clang-tools}/bin/clangd";
+        };
+        ruby-lsp = {
+          command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
+        };
       };
 
       language = [
@@ -57,8 +74,8 @@
           name = "nix";
           auto-format = true;
           language-servers = [
-            "typos"
             "nil"
+            "typos"
           ];
           formatter = {
             command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
@@ -66,12 +83,27 @@
         }
         {
           name = "rust";
-          # 将来的に  [ "typos" "rust-analyzer" "gpt" ] にする
-          language-servers = [
-            "typos"
-            "gpt"
-          ];
           auto-format = true;
+          language-servers = [
+            "rust-analyzer"
+            "typos"
+          ];
+        }
+        {
+          name = "c";
+          auto-format = true;
+          language-servers = [
+            "clangd"
+            "typos"
+          ];
+        }
+        {
+          name = "ruby";
+          auto-format = true;
+          language-servers = [
+            "ruby-lsp"
+            "typos"
+          ];
         }
       ];
     };
