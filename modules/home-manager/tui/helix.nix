@@ -54,10 +54,7 @@
           command = "${pkgs.clang-tools}/bin/clangd";
         };
         ruby-lsp = {
-          command = "ruby-lsp";
-          config = {
-            bundleGemfile = "";
-          };
+          command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
         };
       };
 
@@ -100,6 +97,8 @@
           auto-format = true;
           language-servers = [
             "ruby-lsp"
+            "typos"
+            "gpt"
           ];
           formatter = {
             command = "${pkgs.rufo}/bin/rufo";

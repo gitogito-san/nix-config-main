@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let
   inputImage = ./nahida.jpg;
-  brightness = "-10";
+  brightness = "0";
   contrast = "0";
   fillColor = "black";
 in

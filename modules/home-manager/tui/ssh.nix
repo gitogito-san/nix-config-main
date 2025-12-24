@@ -25,12 +25,14 @@
       sol = {
         hostname = "sol.cc.uec.ac.jp";
         user = "y2511246";
+        identityFile = "~/.ssh/uec_key";
       };
 
       ced = {
         hostname = "orange17.ced.cei.uec.ac.jp";
         user = "y2511246";
         proxyJump = "sol";
+        identityFile = "~/.ssh/uec_key";
       };
     };
 

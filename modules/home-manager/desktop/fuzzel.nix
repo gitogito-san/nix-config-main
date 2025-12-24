@@ -43,7 +43,14 @@
       name = "gemini";
       desktopName = "gemini";
       exec = "firefox https://gemini.google.com";
-      icon = "firefox";
+      icon = ./icons/gemini.png;
+      categories = [ "Education" ];
+    })
+    (pkgs.makeDesktopItem {
+      name = "shinycolors";
+      desktopName = "gemini";
+      exec = "firefox https://shinycolors.enza.fun";
+      icon = ./icons/shinycolors.svg;
       categories = [ "Education" ];
     })
   ];
