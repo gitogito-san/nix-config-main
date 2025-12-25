@@ -48,7 +48,7 @@
     })
     (pkgs.makeDesktopItem {
       name = "shinycolors";
-      desktopName = "gemini";
+      desktopName = "shinycolors";
       exec = "firefox https://shinycolors.enza.fun";
       icon = ./icons/shinycolors.svg;
       categories = [ "Education" ];

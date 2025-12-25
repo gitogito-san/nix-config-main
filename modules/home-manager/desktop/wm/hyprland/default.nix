@@ -107,7 +107,7 @@ in
       general = {
         gaps_in = 4;
         gaps_out = 6;
-        border_size = 2;
+        border_size = 3;
         resize_on_border = false;
         layout = "dwindle";
       };
@@ -137,6 +137,16 @@ in
           disable_while_typing = true;
         };
       };
+      device = [
+        {
+          name = "foostan-corne-v4";
+          kb_layout = "us";
+        }
+        {
+          name = "foostan-corne-v4-keyboard";
+          kb_layout = "us";
+        }
+      ];
 
       # winwindowrule
       windowrule = [

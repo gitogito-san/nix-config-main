@@ -8,4 +8,9 @@
     pkgs.vial
   ];
 
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland;xcb";
+    SDL_VIDEODRIVER = "wayland";
+  };
+
 }

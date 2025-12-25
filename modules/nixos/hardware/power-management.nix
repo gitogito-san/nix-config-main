@@ -14,23 +14,41 @@
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
       CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_BAT = 1;
 
       PLATFORM_PROFILE_ON_AC = "performance";
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
-      WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "off";
-
-      USB_AUTOSUSPEND = 1;
+      USB_AUTOSUSPEND = 0;
       USB_EXCLUDE_PHONE = 1;
 
       PCIE_ASPM_ON_AC = "performance";
+      PCIE_ASPM_ON_BAT = "performance";
+
       DEVICES_TO_ENABLE_ON_STARTUP = "wifi";
+
       RESTORE_DEVICE_STATE_ON_STARTUP = 0;
       DEVICES_TO_DISABLE_ON_STARTUP = "";
     };
   };
+
+  boot.kernelParams = [
+    "softlockup_panic=0"
+    "nmi_watchdog=0"
+    "usbcore.autosuspend=-1"
+    "iommu=pt"
+    "pcie_aspm=off"
+  ];
+
+  boot.extraModprobeConfig = ''
+    options rtw89_pci disable_aspm=y
+    options rtw89_core disable_ps_mode=y
+  '';
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  services.thermald.enable = true;
+  hardware.enableAllFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
 
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
@@ -52,4 +70,5 @@
   };
 
   security.pam.services.swaylock = { };
+
 }
