@@ -138,7 +138,7 @@
       {
         "Mod+Return".action = spawn "${pkgs.alacritty}/bin/alacritty";
         "Mod+Q".action = close-window;
-        "Mod+T".action = spawn "${pkgs.xfce.thunar}/bin/thunar";
+        "Mod+T".action = spawn "${pkgs.thunar}/bin/thunar";
         "Mod+E".action = spawn "${pkgs.wlogout}/bin/wlogout";
         "Mod+L".action = spawn "${pkgs.swaylock-effects}/bin/swaylock";
         "Mod+R".action.spawn = [

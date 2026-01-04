@@ -3,7 +3,7 @@
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   menu = "${pkgs.fuzzel}/bin/fuzzel";
-  fileManager = "${pkgs.xfce.thunar}/bin/thunar";
+  fileManager = "${pkgs.thunar}/bin/thunar";
   lock = "${pkgs.swaylock-effects}/bin/swaylock";
 
   # Tools
@@ -41,9 +41,9 @@ in
     pkgs.dunst
     pkgs.networkmanagerapplet
     pkgs.wlogout
-    pkgs.xfce.thunar
-    pkgs.xfce.thunar-volman
-    pkgs.xfce.thunar-archive-plugin
+    pkgs.thunar
+    pkgs.thunar-volman
+    pkgs.thunar-archive-plugin
     pkgs.blueman
     pkgs.wayvnc
 
@@ -110,6 +110,7 @@ in
         border_size = 3;
         resize_on_border = false;
         layout = "dwindle";
+        no_focus_fallback = true;
       };
 
       # Decoration
@@ -137,6 +138,7 @@ in
           disable_while_typing = true;
         };
       };
+
       device = [
         {
           name = "foostan-corne-v4";
