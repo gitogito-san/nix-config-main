@@ -13,7 +13,11 @@
     ../../modules/home-manager/desktop/fuzzel.nix
     ../../modules/home-manager/desktop/wm/hyprland
     ../../modules/home-manager/desktop/wm/niri
+    ../../modules/home-manager/desktop/media/zathura.nix
+    ../../modules/home-manager/desktop/media/imv.nix
+    ../../modules/home-manager/desktop/media/mpv.nix
     ../../modules/home-manager/desktop/addons/ipad-screen.nix
+    ../../modules/home-manager/gaming
     ../../modules/home-manager/dev
   ];
 

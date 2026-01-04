@@ -2,6 +2,6 @@
 {
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-cpu;
+    # package = pkgs.ollama-cpu;
   };
 }

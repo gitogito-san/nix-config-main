@@ -49,6 +49,14 @@ in
       popups = 1.0;
     };
 
+    iconTheme = {
+      enable = true;
+
+      package = pkgs.rose-pine-icon-theme;
+      dark = "rose-pine";
+      light = "rose-pine-dawn";
+    };
+
   };
 
   environment.sessionVariables = {

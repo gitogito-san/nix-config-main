@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/core
+    ../../modules/nixos/gaming/steam.nix
     ../../modules/nixos/hardware/keyboards.nix
     ../../modules/nixos/hardware/power-management.nix
     ../../modules/nixos/desktop/stylix.nix
@@ -22,6 +23,7 @@
   # System Packages
   environment.systemPackages = [
     pkgs.git
+    pkgs.gcc
   ];
 
   # Firmware

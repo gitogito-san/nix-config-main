@@ -9,7 +9,7 @@
     pkgs.dust
     pkgs.fastfetch
     pkgs.fd
-
+    pkgs.ueberzugpp
   ];
 
   programs = {

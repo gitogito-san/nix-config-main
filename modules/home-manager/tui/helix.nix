@@ -51,10 +51,10 @@
           };
         };
         clangd = {
-          command = "${pkgs.clang-tools}/bin/clangd";
+          command = "clangd";
         };
         ruby-lsp = {
-          command = "${pkgs.ruby-lsp}/bin/ruby-lsp";
+          command = "ruby-lsp";
         };
       };
 
@@ -86,10 +86,9 @@
           auto-format = true;
           language-servers = [
             "clangd"
-            "typos"
           ];
           formatter = {
-            command = "${pkgs.clang-tools}/bin/clang-format";
+            command = "clang-format";
           };
         }
         {
@@ -101,8 +100,7 @@
             "gpt"
           ];
           formatter = {
-            command = "${pkgs.rufo}/bin/rufo";
-            args = [ "-p" ];
+            command = "rufo";
           };
         }
       ];
