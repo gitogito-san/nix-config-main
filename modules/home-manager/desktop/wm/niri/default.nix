@@ -56,7 +56,6 @@
 
     spawn-at-startup = [
       { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-      { command = [ "${pkgs.swww}/bin/swww-daemon" ]; }
       {
         command = [
           "fcitx5"

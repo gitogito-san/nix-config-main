@@ -151,7 +151,7 @@ in
       ];
 
       # winwindowrule
-      windowrule = [
+      windowrulev2 = [
         "float, class:^(org.pulseaudio.pavucontrol)$"
         "float, class:^(xdg-desktop-portal-gtk)$"
         "float, class:^(.blueman-manager-wrapped)$"

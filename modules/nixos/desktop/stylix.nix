@@ -1,9 +1,8 @@
 { pkgs, lib, ... }:
 let
   inputImage = ./nahida.jpg;
-  brightness = "0";
+  brightness = "-10";
   contrast = "0";
-  fillColor = "black";
 in
 
 {
@@ -14,9 +13,16 @@ in
 
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
 
-    image = pkgs.runCommand "dimmed-background.png" { } ''
-      ${lib.getExe' pkgs.imagemagick "convert"} "${inputImage}" -brightness-contrast ${brightness},${contrast} -fill ${fillColor} $out
-    '';
+    image =
+      pkgs.runCommand "re-nahida.png"
+        {
+          nativeBuildInputs = [ pkgs.imagemagick ];
+        }
+        ''
+          convert "${inputImage}" \
+            -brightness-contrast ${brightness},${contrast} \
+            "$out"
+        '';
 
     polarity = "dark";
 
