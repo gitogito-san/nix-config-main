@@ -1,8 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   inputImage = ./nahida.jpg;
-  brightness = "-10";
-  contrast = "0";
 in
 
 {
@@ -11,20 +9,11 @@ in
   stylix = {
     enable = true;
 
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
 
-    image =
-      pkgs.runCommand "re-nahida.png"
-        {
-          nativeBuildInputs = [ pkgs.imagemagick ];
-        }
-        ''
-          convert "${inputImage}" \
-            -brightness-contrast ${brightness},${contrast} \
-            "$out"
-        '';
+    image = inputImage;
 
-    polarity = "dark";
+    # polarity = "dark";
 
     fonts = {
       serif = {
