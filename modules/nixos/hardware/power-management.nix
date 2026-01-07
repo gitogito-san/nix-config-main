@@ -12,32 +12,21 @@
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_DRIVER_OPTS_ON_AC = "amd_pstate=active";
+      CPU_DRIVER_OPTS_ON_BAT = "amd_pstate=active";
 
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 1;
+      PCIE_ASPM_ON_AC = "default";
+      PCIE_ASPM_ON_BAT = "powersupersave";
 
       PLATFORM_PROFILE_ON_AC = "performance";
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
-      USB_AUTOSUSPEND = 0;
-      USB_EXCLUDE_PHONE = 1;
-
-      PCIE_ASPM_ON_AC = "performance";
-      PCIE_ASPM_ON_BAT = "performance";
-
-      DEVICES_TO_ENABLE_ON_STARTUP = "wifi";
-
-      RESTORE_DEVICE_STATE_ON_STARTUP = 0;
-      DEVICES_TO_DISABLE_ON_STARTUP = "";
+      USB_AUTOSUSPEND = 1;
     };
   };
 
   boot.kernelParams = [
-    "softlockup_panic=0"
-    "nmi_watchdog=0"
-    "usbcore.autosuspend=-1"
-    "iommu=pt"
-    "pcie_aspm=off"
+    "amd_pstate=active"
   ];
 
   boot.extraModprobeConfig = ''
@@ -51,24 +40,28 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
+    HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchExternalPower = "lock";
     HandleLidSwitchDocked = "ignore";
   };
 
-  # packages
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=2h
+  '';
+
   environment.systemPackages = [
     pkgs.powertop
   ];
 
   fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/F200-3F29";
+    fsType = "vfat";
     options = [
-      "umask=0077"
+      "fmask=0077"
+      "dmask=0077"
       "noauto"
       "x-systemd.automount"
     ];
   };
-
-  security.pam.services.swaylock = { };
 
 }
