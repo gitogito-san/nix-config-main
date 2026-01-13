@@ -2,7 +2,7 @@
 {
   home.packages = [
     pkgs.prismlauncher # Recursive instance-based Minecraft management.
-    pkgs.dwarf-fortress-full # High-fidelity procedural world simulation.
+    pkgs.dwarf-fortress-full
     pkgs.cataclysm-dda # Hardcore post-apocalyptic survival sandbox.
     pkgs.openttd # Large-scale transport network optimization.
     pkgs.simutrans # Detailed economic logistics simulation.
@@ -20,4 +20,5 @@
     pkgs.gargoyle # High-fidelity, aesthetic IF renderer.
     pkgs.osu-lazer # Extensible, low-latency rhythm platform.
   ];
+
 }

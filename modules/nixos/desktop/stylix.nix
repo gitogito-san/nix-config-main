@@ -13,7 +13,7 @@ in
 
     image = inputImage;
 
-    # polarity = "dark";
+    polarity = "dark";
 
     fonts = {
       serif = {
@@ -44,7 +44,7 @@ in
       popups = 1.0;
     };
 
-    iconTheme = {
+    icons = {
       enable = true;
 
       package = pkgs.rose-pine-icon-theme;

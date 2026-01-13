@@ -305,8 +305,8 @@ in
          font-family: "Hack Nerd Font"; 
          font-size: 18px;
          padding: 0 4px;
-         margin-left: 8px;  
-         margin-right: 8px; 
+         margin-left: 6px;  
+         margin-right: 4px; 
        }
 
        #custom-power {
