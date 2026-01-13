@@ -4,7 +4,7 @@ let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   fileManager = "${pkgs.thunar}/bin/thunar";
-  lock = "${pkgs.swaylock-effects}/bin/swaylock";
+  lock = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --font 'Noto Sans CJK JP'";
 
   # Tools
   jq = "${pkgs.jq}/bin/jq";
@@ -33,12 +33,28 @@ let
     fi
   '';
 
+  # scratchpad
+  toggleTerm = pkgs.writeShellScriptBin "toggle-term" ''
+    if ! ${pkgs.hyprland}/bin/hyprctl clients -j | ${jq} -e '.[] | select(.class == "scratchpad")' > /dev/null; then
+      ${pkgs.hyprland}/bin/hyprctl dispatch exec "[workspace special:scratch;float;size 99% 40%;move 3 30] ${pkgs.alacritty}/bin/alacritty --class scratchpad"
+    else
+      ${pkgs.hyprland}/bin/hyprctl dispatch togglespecialworkspace scratch
+    fi
+  '';
+
+  # web search
+  webSearch = pkgs.writeShellScriptBin "web-search" ''
+    QUERY=$(echo "" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt "  Search: ")
+    if [ -n "$QUERY" ]; then
+      ${pkgs.firefox}/bin/firefox --search "$QUERY"
+    fi
+  '';
+
 in
 
 {
   # packages
   home.packages = [
-    pkgs.dunst
     pkgs.networkmanagerapplet
     pkgs.wlogout
     pkgs.thunar
@@ -57,6 +73,9 @@ in
 
     pkgs.brightnessctl
     pkgs.wireplumber
+
+    toggleTerm
+    webSearch
   ];
 
   programs.alacritty = {
@@ -72,7 +91,7 @@ in
   services.swayidle = {
     enable = true;
     events = {
-      lock = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033";
+      lock = lock;
       before-sleep = "${pkgs.swaylock-effects}/bin/swaylock -f";
     };
   };
@@ -88,11 +107,15 @@ in
 
       monitor = ",preferred,auto,1";
 
+      misc = {
+        vfr = true;
+        vrr = 1;
+      };
+
       exec-once = [
         "swww-daemon"
         "${pkgs.waybar}/bin/waybar"
         "fcitx5 -d"
-        "${pkgs.dunst}/bin/dunst"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
         "mkdir -p $HOME/Pictures/Screenshots"
@@ -124,7 +147,18 @@ in
         };
       };
       animations = {
-        enabled = false;
+        enabled = true;
+        bezier = [
+          "md3_decel, 0.05, 0.7, 0.1, 1"
+          "workspace_curve, 0.17, 0.84, 0.44, 1"
+        ];
+        animation = [
+          "windows, 1, 3, md3_decel, popin 60%"
+          "border, 1, 10, default"
+          "fade, 1, 3, md3_decel"
+          "workspaces, 1, 2.5, workspace_curve, slide"
+          "specialWorkspace, 1, 3, md3_decel, slidevert"
+        ];
       };
 
       # input
@@ -158,14 +192,22 @@ in
         "center, class:^(org.pulseaudio.pavucontrol)$"
         "center, class:^(xdg-desktop-portal-gtk)$"
         "center, class:^(.blueman-manager-wrapped)$"
+        "float, class:^(scratchpad)$"
+        "workspace special:scratch, class:^(scratchpad)$"
+        "noborder, class:^(scratchpad)$"
+        "move 0 30, class:^(scratchpad)$"
+        "size 100% 40%, class:^(scratchpad)$"
+        "animation slide top 1 1.5 md3_decel, class:^(scratchpad)$"
       ];
 
       # bind
       bind = [
         "$mainMod, RETURN, exec, $terminal"
+        "$mainMod SHIFT, Return, exec, ${toggleTerm}/bin/toggle-term"
         "$mainMod, Q, killactive,"
         "$mainMod, T, exec, ${fileManager}"
         "$mainMod, R, exec, $menu"
+        "$mainMod SHIFT, R, exec, ${webSearch}/bin/web-search"
         "$mainMod, E, exec, ${pkgs.wlogout}/bin/wlogout"
         "$mainMod, L, exec, ${lock} -f --screenshots --clock --effect-blur 7x5 --indicator --fade-in 0.5 --font 'Noto Sans CJK JP'"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"

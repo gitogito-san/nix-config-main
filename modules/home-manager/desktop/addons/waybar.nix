@@ -12,7 +12,7 @@ in
         name = "topbar";
         layer = "top";
         position = "top";
-        height = 15;
+        height = 20;
         spacing = 10;
 
         modules-left = [
@@ -22,11 +22,10 @@ in
         modules-center = [ "clock" ];
         modules-right = [
           "wireplumber"
-          "cpu"
-          "temperature"
-          "memory"
-          "disk"
+          "backlight"
+          "group/hardware"
           "battery"
+          "custom/notification"
           "tray"
         ];
 
@@ -62,13 +61,49 @@ in
           ];
         };
 
+        "backlight" = {
+          device = "intel_backlight";
+          format = "{percent}% {icon}";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+          on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
+          on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+          min-length = 6;
+        };
+
+        "group/hardware" = {
+          orientation = "horizontal";
+
+          modules = [
+            "cpu"
+            "memory"
+            "temperature"
+            "disk"
+          ];
+
+          drawer = {
+            transition-duration = 500;
+            children-class = "hw-child";
+            transition-left-to-right = false;
+          };
+        };
+
         "cpu" = {
           format = "CPU {usage}% ";
-          interval = 5;
+          interval = 2;
         };
 
         "temperature" = {
-          interval = 10;
+          interval = 5;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = [
@@ -80,7 +115,7 @@ in
 
         "memory" = {
           format = "Mem {}% ";
-          interval = 10;
+          interval = 5;
         };
 
         "disk" = {
@@ -90,7 +125,7 @@ in
         };
 
         "battery" = {
-          interval = 30;
+          interval = 60;
           states = {
             warning = 30;
             critical = 15;
@@ -107,6 +142,27 @@ in
           ];
         };
 
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon}";
+          format-icons = {
+            notification = "<span foreground='#bf616a'><sup></sup></span>";
+            none = "";
+            dnd-notification = "<span foreground='#bf616a'><sup></sup></span>";
+            dnd-none = "";
+            inhibited-notification = "<span foreground='#bf616a'><sup></sup></span>";
+            inhibited-none = "";
+            dnd-inhibited-notification = "<span foreground='#bf616a'><sup></sup></span>";
+            dnd-inhibited-none = "";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
+        };
+
         "tray" = {
           spacing = 10;
         };
@@ -116,14 +172,14 @@ in
         name = "bottombar";
         layer = "top";
         position = "bottom";
-        height = 10;
-        spacing = 15;
+        height = 20;
+        spacing = 14;
 
         modules-left = [ "mpris" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [
-          "hyprland/language"
           "network"
+          "hyprland/language"
           "custom/power"
         ];
 
@@ -152,11 +208,14 @@ in
         };
 
         "network" = {
-          format-wifi = "{essid} ";
-          format-ethernet = "{ipaddr} ";
+          interval = 2;
+          format-wifi = "<span color='#7dcfff'>↓{bandwidthDownBytes}</span> <span color='#bb9af7'>↑{bandwidthUpBytes}</span> {essid} ";
+          format-ethernet = "<span color='#7dcfff'>↓{bandwidthDownBytes}</span> <span color='#bb9af7'>↑{bandwidthUpBytes}</span> {ipaddr} ";
           format-disconnected = "⚠ Disconnected";
           tooltip-format = "{ifname} via {gwaddr}";
           on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          min-length = 30;
+          justify = "center";
         };
 
         "custom/power" = {
@@ -168,79 +227,102 @@ in
     ];
 
     style = ''
-      * {
-      border: none;
-      border-radius: 0;
-      font-family: "${font}";
-      min-height: 0;
-      }
+       * {
+         border: none;
+         border-radius: 0;
+         font-family: "${font}";
+         min-height: 0;
+       }
 
-      window#waybar {
-        opacity: 0.95; 
-      }
+       window#waybar {
+         opacity: 0.95;
+       }
+       window#waybar.bottombar {
+         opacity: 0.90;
+       }
 
-      window#waybar.bottombar {
-        opacity: 0.90;
-      }
+       #clock,
+       #battery,
+       #tray,
+       #mpris,
+       #network,
+       #language,
+       #window,
+       #wireplumber,
+       #backlight {
+         padding: 0 6px;
+         margin: 0 2px; 
+       }
 
-      #workspaces {
-        margin: 0 5px;
-      }
+       #clock {
+         font-weight: bold;
+       }
 
-      #workspaces button {
-        padding: 0 4px;
-        transition: all 0.2s ease-in-out; 
-      }
+       #battery.charging, #battery.plugged, #mpris {
+         color: #9ece6a;
+       }
+       
+       #battery.critical:not(.charging) {
+         animation-name: blink;
+         animation-duration: 0.5s;
+         animation-iteration-count: infinite;
+         animation-direction: alternate;
+       }
 
-      #clock,
-      #battery,
-      #cpu,
-      #memory,
-      #disk,
-      #tray,
-      #mpris,
-      #network,
-      #language,
-      #window,
-      #wireplumber,
-      #custom-power {
-        padding: 0 6px;
-        margin: 0;
-      }
+       #workspaces {
+         margin: 0 5px;
+       }
+       #workspaces button {
+         padding: 0 4px;
+         transition: all 0.2s ease-in-out;
+       }
 
-      #clock {
-        font-weight: bold;
-      }
+      #hardware {
+         margin: 0 4px;
+       }
+       #cpu {
+         background-color: #4c566a;
+         color: #88c0d0;
+         padding: 0 8px;
+         border-radius: 4px;
+         margin: 0;
+       }
+       #memory, #disk, #temperature {
+         background-color: #3b4252;
+         padding: 0 8px;
+         margin: 0 1px;
+       }
+       #memory { color: #bb9af7; }
+       #disk { color: #e0af68; }
+       #temperature { color: #81a1c1; }
+       
+       #hardware.hovered #cpu, #hardware.show #cpu {
+         border-top-right-radius: 0;
+         border-bottom-right-radius: 0;
+       }
 
+       #custom-notification {
+         font-family: "Hack Nerd Font"; 
+         font-size: 18px;
+         padding: 0 4px;
+         margin-left: 8px;  
+         margin-right: 8px; 
+       }
 
-      #battery.charging, #battery.plugged {
-        color: #9ece6a;
-      }
+       #custom-power {
+         margin-right: 12px; 
+         padding: 0 6px;
+       }
 
-      #battery.critical:not(.charging) {
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-      }
-
-      #cpu { color: #7dcfff; }
-      #memory { color: #bb9af7; }
-      #disk { color: #e0af68; }
-
-      #mpris {
-        color: #9ece6a;
-      }
-
-      #custom-power {
-        margin-right: 10px; 
-      }
-
-      @keyframes blink {
-        to {
-          color: #ffffff;
-        }
-      }
+       @keyframes blink {
+         to { color: #ffffff; }
+       }
     '';
+
   };
+
+  services.playerctld.enable = true;
+  home.packages = with pkgs; [
+    playerctl
+  ];
 }

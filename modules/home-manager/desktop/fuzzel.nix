@@ -51,7 +51,14 @@
       desktopName = "shinycolors";
       exec = "firefox https://shinycolors.enza.fun";
       icon = ./icons/shinycolors.svg;
-      categories = [ "Education" ];
+      categories = [ "Game" ];
+    })
+    (pkgs.makeDesktopItem {
+      name = "twitter";
+      desktopName = "twitter";
+      exec = "firefox https://x.com/home";
+      icon = "firefox";
+      categories = [ "Network" ];
     })
   ];
 
