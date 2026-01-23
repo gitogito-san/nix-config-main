@@ -16,7 +16,10 @@
       CPU_DRIVER_OPTS_ON_BAT = "amd_pstate=active";
 
       PCIE_ASPM_ON_AC = "default";
-      PCIE_ASPM_ON_BAT = "powersupersave";
+      PCIE_ASPM_ON_BAT = "default";
+
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "off";
 
       PLATFORM_PROFILE_ON_AC = "performance";
       PLATFORM_PROFILE_ON_BAT = "low-power";
@@ -27,20 +30,21 @@
 
   boot.kernelParams = [
     "amd_pstate=active"
+    "resume=UUID=7bceb1ba-8c7c-4afa-a172-da2a029f7da3"
   ];
 
-  boot.extraModprobeConfig = ''
-    options rtw89_pci disable_aspm=y
-    options rtw89_core disable_ps_mode=y
-  '';
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/7bceb1ba-8c7c-4afa-a172-da2a029f7da3";
+    }
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  services.thermald.enable = true;
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
 
   services.logind.settings.Login = {
-    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "lock";
     HandleLidSwitchDocked = "ignore";
   };
@@ -63,5 +67,17 @@
       "x-systemd.automount"
     ];
   };
+
+  powerManagement.resumeCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce
+    ${pkgs.kmod}/bin/modprobe -r rtw89_pci
+
+    sleep 1
+
+    ${pkgs.kmod}/bin/modprobe rtw89_pci
+    ${pkgs.kmod}/bin/modprobe rtw89_8852ce
+
+    ${pkgs.systemd}/bin/systemctl restart NetworkManager
+  '';
 
 }

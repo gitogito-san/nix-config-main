@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   home.packages = [
     pkgs.prismlauncher # Recursive instance-based Minecraft management.

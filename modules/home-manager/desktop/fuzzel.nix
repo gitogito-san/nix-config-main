@@ -15,7 +15,7 @@
       name = "classroom";
       desktopName = "Classroom";
       exec = "firefox https://classroom.google.com/u/2/";
-      icon = "firefox";
+      icon = ./icons/classroom.png;
       categories = [ "Education" ];
     })
     (pkgs.makeDesktopItem {
@@ -57,8 +57,15 @@
       name = "twitter";
       desktopName = "twitter";
       exec = "firefox https://x.com/home";
-      icon = "firefox";
+      icon = ./icons/twitter.png;
       categories = [ "Network" ];
+    })
+    (pkgs.makeDesktopItem {
+      name = "ticktick";
+      desktopName = "ticktick";
+      exec = "firefox https://ticktick.com/";
+      icon = ./icons/ticktick.png;
+      categories = [ "Education" ];
     })
   ];
 
