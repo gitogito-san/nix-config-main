@@ -6,6 +6,7 @@
     pkgs.google-chrome
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
     pkgs.discord
+    pkgs.spotify
     pkgs.vial
   ];
 

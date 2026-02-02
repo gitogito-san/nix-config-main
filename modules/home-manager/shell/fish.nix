@@ -5,7 +5,7 @@
     enable = true;
 
     shellAbbrs = {
-      l = "ls -a";
+      l = "eza -a";
       del = "clear";
       update = "sudo nixos-rebuild switch --flake /etc/nixos#lifebook";
     };
