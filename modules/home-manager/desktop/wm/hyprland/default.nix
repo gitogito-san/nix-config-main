@@ -113,7 +113,7 @@ in
       "$terminal" = terminal;
       "$menu" = "${menu} --hide-before-typing --lines 3 --width 40";
 
-      monitor = ",preferred,auto,1";
+      source = "~/.config/hypr/monitors.conf";
 
       misc = {
         vfr = true;
