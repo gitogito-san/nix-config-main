@@ -11,6 +11,7 @@
     ../../modules/nixos/services/minecraft.nix
     ../../modules/nixos/services/playit.nix
     ../../modules/nixos/services/netdata.nix
+    ../../modules/nixos/services/homepage.nix
   ];
 
   # Host
