@@ -7,7 +7,7 @@
     shellAbbrs = {
       l = "eza -a";
       del = "clear";
-      update = "sudo nixos-rebuild switch --flake /etc/nixos#lifebook";
+      update = "cd ~/nix-config && git pull && sudo nixos-rebuild switch --flake . && cd -";
     };
     interactiveShellInit = ''
       if test -f /run/agenix/copilotApiKey
