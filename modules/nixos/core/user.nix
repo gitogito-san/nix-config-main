@@ -17,4 +17,9 @@
     ];
     shell = pkgs.fish;
   };
+
+  nix.settings.trusted-users = [
+    "root"
+    "ya"
+  ];
 }

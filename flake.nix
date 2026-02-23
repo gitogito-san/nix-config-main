@@ -30,6 +30,12 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    playit = {
+      url = "github:pedorich-n/playit-nixos-module";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -44,6 +50,7 @@
       stylix-stable,
       niri,
       treefmt-nix,
+      playit,
       ...
     }@inputs:
     {
@@ -86,6 +93,7 @@
           home-manager-stable.nixosModules.default
           agenix.nixosModules.default
           stylix-stable.nixosModules.stylix
+          playit.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;

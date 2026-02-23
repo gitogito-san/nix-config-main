@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -7,6 +7,10 @@
     ../../modules/nixos/desktop/stylix.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/adguard.nix
+    ../../modules/nixos/services/docker.nix
+    ../../modules/nixos/services/minecraft.nix
+    ../../modules/nixos/services/playit.nix
+    ../../modules/nixos/services/netdata.nix
   ];
 
   # Host
