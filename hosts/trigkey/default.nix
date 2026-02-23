@@ -49,4 +49,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQudxqP1y+lmBwCpPE+JkpdVHK9FPw8n0IibALGEbwL ya@nixos"
     ];
   };
+
+  # ユーザーの sudo パスワード要求を完全に無効化する（ヘッドレス特化）
+  security.sudo.wheelNeedsPassword = false;
 }
