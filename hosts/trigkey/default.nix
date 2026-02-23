@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/core/default.nix # メイン機の共通設定（ユーザー、タイムゾーン等）を流用
+    ../../modules/nixos/services/adguard.nix
   ];
 
   # --- ブートローダーの設定 ---
@@ -39,6 +40,7 @@
 
   # サーバーとしての不要パッケージ削減（軽量化）
   environment.defaultPackages = [ ];
+  environment.systemPackages = [ pkgs.git ];
   services.xserver.enable = false; # GUIの完全無効化
 
   # Masterの指定通り、最新stableバージョンを設定
