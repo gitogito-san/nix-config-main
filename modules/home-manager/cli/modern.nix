@@ -10,6 +10,17 @@
     pkgs.fastfetch
     pkgs.fd
     pkgs.ueberzugpp
+
+    # PDF圧縮用スクリプト
+    (pkgs.writeShellScriptBin "pdf-shrink" ''
+      if [ -z "$1" ]; then
+        echo "Usage: pdf-shrink input.pdf [output.pdf]"
+        exit 1
+      fi
+      IN="$1"
+      OUT="''${2:-compressed_''${IN}}"
+      ${pkgs.ghostscript}/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$OUT" "$IN"
+    '')
   ];
 
   programs = {

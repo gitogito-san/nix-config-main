@@ -33,6 +33,8 @@
     "resume=UUID=7bceb1ba-8c7c-4afa-a172-da2a029f7da3"
   ];
 
+  hardware.enableRedistributableFirmware = true;
+
   swapDevices = [
     {
       device = "/dev/disk/by-uuid/7bceb1ba-8c7c-4afa-a172-da2a029f7da3";
@@ -47,11 +49,8 @@
     HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "lock";
     HandleLidSwitchDocked = "ignore";
+    HandlePowerKey = "suspend";
   };
-
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=2h
-  '';
 
   environment.systemPackages = [
     pkgs.powertop

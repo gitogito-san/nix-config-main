@@ -2,6 +2,8 @@
 
 {
   home.packages = [
+    pkgs.unrar
+    pkgs.unzip
     pkgs.prismlauncher # Recursive instance-based Minecraft management.
     pkgs.dwarf-fortress-full
     pkgs.cataclysm-dda # Hardcore post-apocalyptic survival sandbox.

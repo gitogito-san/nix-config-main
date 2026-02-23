@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +30,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       agenix,
       stylix,
@@ -64,6 +66,31 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.ya = ./home/ya;
+            };
+          }
+        ];
+      };
+      nixosConfigurations.trigkey = nixpkgs-stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/trigkey/default.nix
+          home-manager.nixosModules.default
+          agenix.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.ya = {
+                imports = [
+                  ./modules/home-manager/core/default.nix
+                  ./modules/home-manager/tui/helix.nix
+                  ./modules/home-manager/tui/ssh.nix
+                  ./modules/home-manager/shell/fish.nix
+                  ./modules/home-manager/shell/starship.nix
+                ];
+              };
             };
           }
         ];

@@ -33,13 +33,6 @@
             autoArchive = true;
           };
         };
-        gpt = {
-          command = "${pkgs.helix-gpt}/bin/helix-gpt";
-          args = [
-            "--handler"
-            "copilot"
-          ];
-        };
         typos = {
           command = "${pkgs.typos-lsp}/bin/typos-lsp";
         };
@@ -97,7 +90,6 @@
           language-servers = [
             "ruby-lsp"
             "typos"
-            "gpt"
           ];
           formatter = {
             command = "rufo";

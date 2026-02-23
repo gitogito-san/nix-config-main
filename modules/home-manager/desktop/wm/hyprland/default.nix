@@ -194,21 +194,25 @@ in
       ];
 
       # winwindowrule
-      windowrulev2 = [
-        "float, class:^(org.pulseaudio.pavucontrol)$"
-        "float, class:^(xdg-desktop-portal-gtk)$"
-        "float, class:^(.blueman-manager-wrapped)$"
-        "center, class:^(org.pulseaudio.pavucontrol)$"
-        "center, class:^(xdg-desktop-portal-gtk)$"
-        "center, class:^(.blueman-manager-wrapped)$"
-        "float, class:^(scratchpad)$"
-        "workspace special:scratch, class:^(scratchpad)$"
-        "center, class:^(scratchpad)$"
-        "size 70% 50%, class:^(scratchpad)$"
-        "noborder, class:^(scratchpad)$"
-        "noshadow, class:^(scratchpad)$"
-        "dimaround, class:^(scratchpad)$"
-        "animation slide top 100% 1, class:^(scratchpad)$, overshoot"
+      windowrule = [
+        "match:class ^(org.pulseaudio.pavucontrol)$, float 1"
+        "match:class ^(xdg-desktop-portal-gtk)$, float 1"
+        "match:class ^(.blueman-manager-wrapped)$, float 1"
+
+        "match:class ^(org.pulseaudio.pavucontrol)$, center 1"
+        "match:class ^(xdg-desktop-portal-gtk)$, center 1"
+        "match:class ^(.blueman-manager-wrapped)$, center 1"
+
+        "match:class ^(scratchpad)$, float 1"
+        "match:class ^(scratchpad)$, workspace special:scratch"
+        "match:class ^(scratchpad)$, center 1"
+        "match:class ^(scratchpad)$, size 70% 50%"
+
+        # "match:class ^(scratchpad)$, no_border on"
+        "match:class ^(scratchpad)$, no_shadow 1"
+        "match:class ^(scratchpad)$, dim_around 1"
+
+        "match:class ^(scratchpad)$, animation slide"
       ];
 
       # bind
