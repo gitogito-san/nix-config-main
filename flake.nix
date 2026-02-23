@@ -71,7 +71,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.ya = ./home/ya;
+              users.ya = ./home/ya/lifebook.nix;
             };
           }
         ];
@@ -88,15 +88,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.ya = {
-                imports = [
-                  ./modules/home-manager/core/default.nix
-                  ./modules/home-manager/tui/helix.nix
-                  ./modules/home-manager/tui/ssh.nix
-                  ./modules/home-manager/shell/fish.nix
-                  ./modules/home-manager/shell/starship.nix
-                ];
-              };
+              users.ya = ./home/ya/trigkey.nix;
             };
           }
         ];

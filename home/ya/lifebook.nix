@@ -26,5 +26,4 @@
   # User
   home.username = "ya";
   home.homeDirectory = "/home/ya";
-
 }
