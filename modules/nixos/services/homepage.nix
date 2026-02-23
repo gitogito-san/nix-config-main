@@ -5,10 +5,10 @@
     enable = true;
 
     settings = {
-      title = "Master's TRIGKEY";
-      background = "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2000";
-      # background = "#0f172a";
-      cardBlur = "sm";
+      title = "shortcut list";
+      background = "#022c22";
+      theme = "dark";
+      cardBlur = "md";
     };
 
     services = [
