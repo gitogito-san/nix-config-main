@@ -12,7 +12,6 @@
         cursorline = true;
         true-color = true;
         idle-timeout = 0;
-        clipboard-provider = "wayland";
         default-yank-register = "+";
         cursor-shape = {
           insert = "bar";

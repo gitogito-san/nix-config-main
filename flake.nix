@@ -18,6 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
+    stylix-stable.url = "github:danth/stylix/release-25.11";
     niri.url = "github:sodiboo/niri-flake";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -35,11 +36,12 @@
     {
       self,
       nixpkgs,
-      home-manager,
       nixpkgs-stable,
+      home-manager,
       home-manager-stable,
       agenix,
       stylix,
+      stylix-stable,
       niri,
       treefmt-nix,
       ...
@@ -83,7 +85,7 @@
           ./hosts/trigkey
           home-manager-stable.nixosModules.default
           agenix.nixosModules.default
-          stylix.nixosModules.stylix
+          stylix-stable.nixosModules.stylix
           {
             home-manager = {
               useGlobalPkgs = true;
