@@ -100,7 +100,6 @@
   };
 
   # Packages
-  home.packages = [
-  ];
+  home.packages = [ ];
 
 }

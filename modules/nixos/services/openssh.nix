@@ -3,6 +3,12 @@
 {
   services.openssh = {
     enable = true;
-    openFirewall = false;
+    openFirewall = true;
+
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 }

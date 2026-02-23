@@ -21,10 +21,7 @@
   networking.hostName = "lifebook";
 
   # System Packages
-  environment.systemPackages = [
-    pkgs.git
-    pkgs.gcc
-  ];
+  environment.systemPackages = [ ];
 
   # Firmware
   hardware.enableAllFirmware = true;

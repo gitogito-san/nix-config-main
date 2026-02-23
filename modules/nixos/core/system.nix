@@ -29,6 +29,11 @@
     ];
     warn-dirty = false;
   };
+
+  environment.systemPackages = [
+    pkgs.git
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   # Optimization
@@ -38,5 +43,4 @@
     options = "--delete-older-than 7d";
   };
   nix.settings.auto-optimise-store = true;
-
 }

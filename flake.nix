@@ -61,7 +61,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/lifebook/default.nix
+          ./hosts/lifebook
           home-manager.nixosModules.default
           agenix.nixosModules.default
           stylix.nixosModules.stylix
@@ -80,9 +80,10 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/trigkey/default.nix
+          ./hosts/trigkey
           home-manager-stable.nixosModules.default
           agenix.nixosModules.default
+          stylix.nixosModules.stylix
           {
             home-manager = {
               useGlobalPkgs = true;
