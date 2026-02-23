@@ -33,7 +33,7 @@
     trustedInterfaces = [ "tailscale0" ];
 
     # 外部のインターネットや、Tailscaleを通さない大学のWi-Fi等からの直接アクセスは全て遮断
-    allowedTCPPorts = [ ];
+    allowedTCPPorts = [ 22 ];
     allowedUDPPorts = [ ];
   };
 
@@ -43,4 +43,10 @@
 
   # Masterの指定通り、最新stableバージョンを設定
   system.stateVersion = "25.11";
+
+  users.users.ya = {
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQudxqP1y+lmBwCpPE+JkpdVHK9FPw8n0IibALGEbwL ya@nixos"
+    ];
+  };
 }
