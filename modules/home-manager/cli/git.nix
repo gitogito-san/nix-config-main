@@ -25,7 +25,7 @@
     gaa = "git add --all";
     gc = "git commit -v";
     gcmsg = "git commit -m";
-    gp = "git push";
+    gp = "git pull";
     lg = "lazygit";
   };
 }
