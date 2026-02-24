@@ -28,6 +28,13 @@
               description = "広告ブロック・DNS";
             };
           }
+          {
+            "Uptime Kuma" = {
+              icon = "uptime-kuma";
+              href = "http://100.90.113.106:3001/";
+              description = "サービスの死活監視";
+            };
+          }
         ];
       }
       {
@@ -56,48 +63,62 @@
         "UEC" = [
           {
             "学務情報システム" = {
-              icon = "si-nixos";
-              href = "https://kyomu.office.uec.ac.jp/cp/";
+              icon = "mdi-school";
+              href = "https://campusweb.office.uec.ac.jp/campusweb/";
               description = "履修登録・成績確認";
             };
           }
           {
             "WebClass" = {
-              icon = "si-google-classroom";
-              href = "https://webclass.cdel.uec.ac.jp/";
+              icon = "mdi-presentation";
+              href = "https://webclass.cdel.uec.ac.jp/webclass/";
               description = "学修支援システム";
             };
           }
           {
+            "Moodle" = {
+              icon = "mdi-notebook-edit";
+              href = "https://joho.g-edu.uec.ac.jp/moodle3/";
+              description = "共通教養科目LMS";
+            };
+          }
+          {
             "UEC Portal" = {
-              icon = "si-university";
-              href = "https://portallms.uec.ac.jp/";
+              icon = "mdi-login";
+              href = "https://portalweb.uec.ac.jp/Portal/";
               description = "ポータルサイト";
             };
           }
           {
             "LMS" = {
-              icon = "si-experiment";
-              href = "https://lms.uec.ac.jp/";
+              icon = "mdi-flask";
+              href = "https://lms.edu.uec.ac.jp/";
               description = "実験・専門科目LMS";
             };
           }
           {
             "Google Classroom" = {
-              icon = "si-google-classroom";
+              icon = "si-googleclassroom";
               href = "https://classroom.google.com/u/2/";
             };
           }
           {
             "My Library" = {
               icon = "si-bookstack";
-              href = "https://opac.lib.uec.ac.jp/my/my.cgi";
+              href = "https://uec.primo.exlibrisgroup.com/";
             };
           }
           {
             "学内マップ" = {
-              icon = "si-google-maps";
-              href = "https://www.uec.ac.jp/about/profile/access/";
+              icon = "mdi-map-marker";
+              href = "https://uec-map.e-chan.me/";
+            };
+          }
+          {
+            "UBoard UEC" = {
+              icon = "mdi-bookmark-multiple";
+              href = "https://uboard.info/uec";
+              description = "リンク集";
             };
           }
         ];
