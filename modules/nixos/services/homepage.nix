@@ -41,7 +41,7 @@
         "Media" = [
           {
             "Navidrome" = {
-              icon = "si-navidrome";
+              icon = "navidrome";
               href = "http://100.90.113.106:4533/";
               description = "音楽ストリーミング";
             };
