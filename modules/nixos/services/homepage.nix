@@ -52,6 +52,57 @@
           }
         ];
       }
+      {
+        "UEC" = [
+          {
+            "学務情報システム" = {
+              icon = "si-nixos";
+              href = "https://kyomu.office.uec.ac.jp/cp/";
+              description = "履修登録・成績確認";
+            };
+          }
+          {
+            "WebClass" = {
+              icon = "si-google-classroom";
+              href = "https://webclass.cdel.uec.ac.jp/";
+              description = "学修支援システム";
+            };
+          }
+          {
+            "UEC Portal" = {
+              icon = "si-university";
+              href = "https://portallms.uec.ac.jp/";
+              description = "ポータルサイト";
+            };
+          }
+          {
+            "LMS" = {
+              icon = "si-experiment";
+              href = "https://lms.uec.ac.jp/";
+              description = "実験・専門科目LMS";
+            };
+          }
+          {
+            "Google Classroom" = {
+              icon = "si-google-classroom";
+              href = "https://classroom.google.com/u/2/";
+            };
+          }
+          {
+            "My Library" = {
+              icon = "si-bookstack";
+              href = "https://opac.lib.uec.ac.jp/my/my.cgi";
+            };
+          }
+          {
+            "学内マップ" = {
+              icon = "si-google-maps";
+              href = "https://www.uec.ac.jp/about/profile/access/";
+            };
+          }
+        ];
+      }
+
     ];
   };
 
