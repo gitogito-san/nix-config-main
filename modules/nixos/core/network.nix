@@ -40,7 +40,9 @@
       ExecStart = pkgs.writeShellScript "tailscale-gro-fix" ''
         IFACE="enp1s0"
         if [ -d "/sys/class/net/$IFACE" ]; then
-          ${pkgs.ethtool}/bin/ethtool -K "$IFACE" rx-udp-gro on tx-udp-segmentation on
+          echo "Optimizing $IFACE for Tailscale..."
+          ${pkgs.ethtool}/bin/ethtool -K "$IFACE" rx-udp-gro on || echo "rx-udp-gro not supported, skipping."
+          ${pkgs.ethtool}/bin/ethtool -K "$IFACE" tx-udp-segmentation on || echo "tx-udp-segmentation not supported, skipping."
         else
           echo "Device $IFACE not found, skipping optimization."
         fi
