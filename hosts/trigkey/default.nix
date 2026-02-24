@@ -12,6 +12,7 @@
     ../../modules/nixos/services/playit.nix
     ../../modules/nixos/services/netdata.nix
     ../../modules/nixos/services/homepage.nix
+    ../../modules/nixos/services/nginx.nix
   ];
 
   # Host

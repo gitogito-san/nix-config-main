@@ -41,6 +41,17 @@
           }
         ];
       }
+      {
+        "Study" = [
+          {
+            "Timetable" = {
+              icon = "mdi-calendar-clock";
+              href = "http://100.90.113.106:8080/";
+              description = "時間割";
+            };
+          }
+        ];
+      }
     ];
   };
 
