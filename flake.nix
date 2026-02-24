@@ -3,12 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-2411.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -43,6 +43,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      nixpkgs-2411,
       home-manager,
       home-manager-stable,
       agenix,
@@ -67,9 +68,9 @@
         }).config.build.wrapper;
 
       nixosConfigurations.lifebook = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./hosts/lifebook
           home-manager.nixosModules.default
           agenix.nixosModules.default
@@ -86,15 +87,25 @@
         ];
       };
       nixosConfigurations.trigkey = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./hosts/trigkey
           home-manager-stable.nixosModules.default
           agenix.nixosModules.default
           stylix-stable.nixosModules.stylix
           playit.nixosModules.default
           ./modules/nixos/services/uptime-kuma.nix
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  navidrome = nixpkgs-2411.legacyPackages.x86_64-linux.navidrome;
+                })
+              ];
+            }
+          )
           ./modules/nixos/services/navidrome.nix
           {
             home-manager = {

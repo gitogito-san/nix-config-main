@@ -38,6 +38,17 @@
         ];
       }
       {
+        "Media" = [
+          {
+            "Navidrome" = {
+              icon = "si-navidrome";
+              href = "http://100.90.113.106:4533/";
+              description = "音楽ストリーミング";
+            };
+          }
+        ];
+      }
+      {
         "Gaming" = [
           {
             "Plaiit.gg" = {
