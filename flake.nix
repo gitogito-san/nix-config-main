@@ -107,6 +107,7 @@
             }
           )
           ./modules/nixos/services/navidrome.nix
+          ./modules/nixos/services/samba.nix
           {
             home-manager = {
               useGlobalPkgs = true;
