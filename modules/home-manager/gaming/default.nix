@@ -23,5 +23,4 @@
     pkgs.gargoyle # High-fidelity, aesthetic IF renderer.
     pkgs.osu-lazer # Extensible, low-latency rhythm platform.
   ];
-
 }
