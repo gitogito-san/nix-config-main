@@ -1,21 +1,23 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   virtualisation.oci-containers.containers."minecraft-server" = {
-    image = "itzg/minecraft-server";
+    image = "itzg/minecraft-server:java17"; # Modパックのバージョンに合わせてJava17を指定
     autoStart = true;
     ports = [
       "25565:25565"
     ];
     environment = {
       EULA = "TRUE";
-      VERSION = "1.20.1";
-      TYPE = "FABRIC";
-      MEMORY = "4G";
+
+      TYPE = "CURSEFORGE";
+      CF_SERVER_MOD = "/data/SkyFactory5-5.0.8.zip"; # 配置したZIPをここで読み込ませる
+      MEMORY = "8G"; # メモリは8GBを確保
+
       TZ = "Asia/Tokyo";
       CREATE_CONSOLE_IN_PIPE = "true";
 
-      MAX_PLAYERS = "4";
+      MAX_PLAYERS = "1";
       VIEW_DISTANCE = "10";
 
       OPS = "ak_chan";
