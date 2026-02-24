@@ -6,7 +6,7 @@
     settings = {
       Address = "0.0.0.0";
       Port = 4533;
-      MusicFolder = "/var/lib/navidrome/music";
+      MusicFolder = "/srv/music";
       DefaultLanguage = "jp";
     };
   };

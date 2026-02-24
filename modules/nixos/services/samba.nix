@@ -11,7 +11,7 @@
         "map to guest" = "bad user";
       };
       "music" = {
-        path = "/var/lib/navidrome/music";
+        path = "/srv/music";
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "yes";

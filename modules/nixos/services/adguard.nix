@@ -6,7 +6,7 @@
     openFirewall = true;
   };
 
-  networking.firewall.interfaces."tailscale0" = {
+  networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
   };
