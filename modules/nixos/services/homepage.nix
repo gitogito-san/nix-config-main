@@ -49,6 +49,24 @@
         ];
       }
       {
+        "Tools" = [
+          {
+            "Stirling-PDF" = {
+              icon = "mdi-file-pdf-box";
+              href = "http://100.90.113.106:8083/";
+              description = "PDF編集・OCRツール";
+            };
+          }
+          {
+            "Kavita" = {
+              icon = "kavita";
+              href = "http://100.90.113.106:50000/";
+              description = "電子書籍・PDFリーダー";
+            };
+          }
+        ];
+      }
+      {
         "Gaming" = [
           {
             "Plaiit.gg" = {

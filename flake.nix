@@ -96,6 +96,7 @@
           stylix-stable.nixosModules.stylix
           playit.nixosModules.default
           ./modules/nixos/services/uptime-kuma.nix
+          ./modules/nixos/services/reading.nix
           (
             { pkgs, ... }:
             {

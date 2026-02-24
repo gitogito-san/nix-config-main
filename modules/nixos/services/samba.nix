@@ -10,6 +10,15 @@
         "server string" = "Trigkey NAS";
         "map to guest" = "bad user";
       };
+      "nas" = {
+        path = "/srv/nas";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "force user" = "ya";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
       "music" = {
         path = "/srv/music";
         browseable = "yes";
