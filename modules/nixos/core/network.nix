@@ -10,7 +10,13 @@
     ];
   };
 
-  # strongswan
+  services.strongswan.enable = true;
+  services.xl2tpd.enable = true;
+  environment.systemPackages = [
+    pkgs.strongswan
+    pkgs.xl2tpd
+    pkgs.ethtool
+  ];
   environment.etc."strongswan.conf".text = "";
 
   # Bluetooth
@@ -19,6 +25,29 @@
   services.blueman.enable = true;
 
   # Tailscale
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
 
+  systemd.services.tailscale-gro-optimize = {
+    description = "Tailscale UDP GRO optimization";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "tailscale-gro-fix" ''
+        IFACE="enp1s0"
+        if [ -d "/sys/class/net/$IFACE" ]; then
+          ${pkgs.ethtool}/bin/ethtool -K "$IFACE" rx-udp-gro on tx-udp-segmentation on
+        else
+          echo "Device $IFACE not found, skipping optimization."
+        fi
+      '';
+      RemainAfterExit = true;
+    };
+  };
+
+  networking.firewall.checkReversePath = "loose";
 }
