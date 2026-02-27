@@ -21,16 +21,34 @@ let
 
   # Screenshot
   screenshotActive = pkgs.writeShellScript "screenshot-active" ''
-    FILEPATH=$(${zenity} --file-selection --save --confirm-overwrite --filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S_active.png)")
+    GEOMETRY=$(${pkgs.hyprland}/bin/hyprctl activewindow -j | ${jq} -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+    mkdir -p "$HOME/Pictures/Screenshots"
+    FILEPATH=$(${zenity} --file-selection --save --confirm-overwrite --filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S)_active.png")
     if [ -n "$FILEPATH" ]; then
-      ${grim} -g "$(${pkgs.hyprland}/bin/hyprctl activewindow -j | ${jq} -r "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])")" "$FILEPATH"
+      sleep 0.5
+      ${grim} -g "$GEOMETRY" "$FILEPATH"
     fi
   '';
   screenshotAll = pkgs.writeShellScript "screenshot-all" ''
-    FILEPATH=$(${zenity} --file-selection --save --confirm-overwrite --filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S_all.png)")
+    mkdir -p "$HOME/Pictures/Screenshots"
+    FILEPATH=$(${zenity} --file-selection --save --confirm-overwrite --filename="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S)_all.png")
     if [ -n "$FILEPATH" ]; then
+      sleep 0.5
       ${grim} "$FILEPATH"
     fi
+  '';
+  ocrCopyTranslate = pkgs.writeShellScript "ocr-copy-translate" ''
+    ${grim} -g "$(${slurp})" /tmp/ocr_target.png
+    if [ ! -f /tmp/ocr_target.png ]; then exit 0; fi
+    TEXT=$(${pkgs.tesseract}/bin/tesseract /tmp/ocr_target.png stdout -l eng --psm 6 quiet)
+    if ping -q -c 1 -W 1 8.8.8.8 >/dev/null 2>&1; then
+      TRANS=$(${pkgs.translate-shell}/bin/trans -b -t ja "$TEXT")
+    else
+      TRANS="[※ オフラインのため翻訳処理をスキップしました]"
+    fi
+    echo "$TEXT" | ${wlCopy}
+    echo -e "【原文】\n$TEXT\n\n【翻訳】\n$TRANS" | ${zenity} --text-info --title="OCR & 翻訳結果" --width=600 --height=400
+    rm /tmp/ocr_target.png
   '';
 
   # scratchpad
@@ -78,6 +96,14 @@ in
     pkgs.swaylock-effects
     pkgs.jq
     pkgs.zenity
+    (pkgs.tesseract.override {
+      enableLanguages = [
+        "eng"
+        "jpn"
+        "jpn_vert"
+      ];
+    })
+    pkgs.translate-shell
 
     pkgs.brightnessctl
     pkgs.wireplumber
@@ -261,9 +287,13 @@ in
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
         # screenshot
+        # ", Print, exec, ${screenshotActive}"
+        # "SHIFT, Print, exec, ${screenshotAll}"
+        # "$mainMod, Print, exec, ${grim} -g \"$(${slurp})\" - | ${wlCopy}"
         ", Print, exec, ${screenshotActive}"
         "SHIFT, Print, exec, ${screenshotAll}"
-        "$mainMod, Print, exec, ${grim} -g \"$(${slurp})\" - | ${wlCopy}"
+        "$mainMod, Print, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mainMod SHIFT, Print, exec, ${ocrCopyTranslate}"
 
         # window change rule
         "$mainMod, F, fullscreen"
