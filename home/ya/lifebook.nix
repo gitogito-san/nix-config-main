@@ -21,6 +21,7 @@
     ../../modules/home-manager/desktop/addons/displays.nix
     ../../modules/home-manager/gaming
     ../../modules/home-manager/dev
+    ../../modules/home-manager/gui/thunar.nix
   ];
 
   # User

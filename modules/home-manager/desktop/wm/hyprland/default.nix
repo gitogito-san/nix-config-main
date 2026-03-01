@@ -83,9 +83,6 @@ in
   home.packages = [
     pkgs.networkmanagerapplet
     pkgs.wlogout
-    pkgs.thunar
-    pkgs.thunar-volman
-    pkgs.thunar-archive-plugin
     pkgs.blueman
     pkgs.wayvnc
 
