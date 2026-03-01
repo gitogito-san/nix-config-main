@@ -3,16 +3,17 @@
 {
   virtualisation.oci-containers.containers."minecraft-server" = {
     image = "itzg/minecraft-server:java17"; # Modパックのバージョンに合わせてJava17を指定
-    autoStart = true;
+    autoStart = false;
     ports = [
       "25565:25565"
     ];
     environment = {
       EULA = "TRUE";
 
-      TYPE = "CURSEFORGE";
-      CF_SERVER_MOD = "/data/SkyFactory5-5.0.8.zip"; # 配置したZIPをここで読み込ませる
-      MEMORY = "8G"; # メモリは8GBを確保
+      TYPE = "FORGE";
+      VERSION = "1.20.1";
+      GENERIC_PACK = "/data/SkyFactory_5_Server_5.0.8.zip";
+      MEMORY = "8G";
 
       TZ = "Asia/Tokyo";
       CREATE_CONSOLE_IN_PIPE = "true";
