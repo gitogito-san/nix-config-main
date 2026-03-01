@@ -16,6 +16,8 @@
         "/srv/stirling-pdf/configs:/configs"
       ];
       environment = {
+        SECURITY_ENABLE_LOGIN = "false";
+        DOCKER_ENABLE_SECURITY = "false";
         SYSTEM_DEFAULTLOCALE = "ja-JP";
       };
     };
