@@ -7,6 +7,7 @@
     pkgs.gvfs
     pkgs.samba
     pkgs.cifs-utils
+    pkgs.sshfs
   ];
 
   xfconf.settings = {
