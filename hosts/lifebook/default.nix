@@ -16,6 +16,7 @@
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/ollama.nix
     ../../modules/nixos/services/thunar.nix
+    ../../modules/nixos/services/valent.nix
   ];
 
   # Host
