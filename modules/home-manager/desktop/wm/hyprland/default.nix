@@ -152,6 +152,7 @@ in
         "mkdir -p $HOME/Pictures/Screenshots"
         "${wlPaste} --type text --watch ${cliphist} store"
         "${wlPaste} --type image --watch ${cliphist} store"
+        "valent --gapplication-service"
       ];
 
       # env variables
