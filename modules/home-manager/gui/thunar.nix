@@ -1,9 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.thunar
-    pkgs.thunar-volman
-    pkgs.thunar-archive-plugin
     pkgs.gvfs
     pkgs.samba
     pkgs.cifs-utils

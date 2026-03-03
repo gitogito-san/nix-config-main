@@ -145,7 +145,7 @@ in
 
       exec-once = [
         "swww-daemon"
-        "${pkgs.waybar}/bin/waybar"
+        "bash -c 'sleep 3; while true; do ${pkgs.waybar}/bin/waybar; sleep 2; done' &"
         "fcitx5 -d"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
