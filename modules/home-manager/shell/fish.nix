@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.fish = {
@@ -8,6 +8,17 @@
       l = "eza -a";
       del = "clear";
       update = "pushd ~/nix-config && git pull && sudo nixos-rebuild switch --flake . && popd";
+    };
+    functions = {
+      ytdl = ''
+        yt-dlp \
+          --extract-audio \
+          --audio-format m4a \
+          --embed-thumbnail \
+          --embed-metadata \
+          --parse-metadata "title:%(artist)s - %(title)s" \
+          $argv
+      '';
     };
     interactiveShellInit = ''
       if test -f /run/agenix/copilotApiKey

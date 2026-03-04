@@ -99,6 +99,10 @@
   };
 
   # Packages
-  home.packages = [ ];
+  home.packages = [
+    pkgs.yt-dlp
+    pkgs.ffmpeg
+    pkgs.picard
+  ];
 
 }
