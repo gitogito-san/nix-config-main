@@ -17,6 +17,7 @@
           --embed-thumbnail \
           --embed-metadata \
           --parse-metadata "title:%(artist)s - %(title)s" \
+          --output "%(title)s.%(ext)s" \
           $argv
       '';
     };
