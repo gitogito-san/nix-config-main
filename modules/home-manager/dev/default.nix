@@ -2,7 +2,7 @@
 
 {
   home.packages = [
-    pkgs.vscode
+    # pkgs.vscode
     pkgs.gcc
     pkgs.cargo
   ];
