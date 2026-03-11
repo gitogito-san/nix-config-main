@@ -5,7 +5,6 @@
     enable = true;
 
     shellAbbrs = {
-      l = "eza -a";
       del = "clear";
       update = "pushd ~/nix-config && git pull && sudo nixos-rebuild switch --flake . && popd";
     };
