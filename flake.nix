@@ -49,7 +49,6 @@
       agenix,
       stylix,
       stylix-stable,
-      niri,
       treefmt-nix,
       playit,
       ...
@@ -75,7 +74,6 @@
           home-manager.nixosModules.default
           agenix.nixosModules.default
           stylix.nixosModules.stylix
-          niri.nixosModules.niri
           {
             home-manager = {
               useGlobalPkgs = true;

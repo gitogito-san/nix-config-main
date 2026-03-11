@@ -14,7 +14,6 @@
     ../../modules/home-manager/desktop/cursor.nix
     ../../modules/home-manager/desktop/fuzzel.nix
     ../../modules/home-manager/desktop/wm/hyprland
-    ../../modules/home-manager/desktop/wm/niri
     ../../modules/home-manager/desktop/media/zathura.nix
     ../../modules/home-manager/desktop/media/imv.nix
     ../../modules/home-manager/desktop/media/mpv.nix
