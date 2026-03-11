@@ -1,49 +1,40 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
-  targetIconName = "cross";
-  variantName = "Nordzy-Gapped-Precision";
-  sourcePkg = pkgs.nordzy-cursor-theme;
-  baseTheme = "Nordzy-catppuccin-frappe-light";
+  hackedCustomCursor = pkgs.stdenv.mkDerivation {
+    pname = "hacked-cursor-black";
+    version = "1.0";
 
-  stableReticleTheme = pkgs.runCommand "nordzy-stable-reticle-v2" { } ''
-        ICON_DIR=$out/share/icons/${variantName}
-        mkdir -p $ICON_DIR/cursors
+    src = pkgs.fetchzip {
+      # URLの末尾を dl=1 に変更し、直接ダウンロードを強制する
+      url = "https://www.dropbox.com/scl/fi/au99ozxjuo74yot/Hacked-Black.tgz?rlkey=vsbtxjvqb6ubq9ml175tyso1x&dl=1";
+      extension = "tgz"; # ← これを追加して拡張子を強制認識させる
+      # 初回は意図的にダミーハッシュを指定してエラーを起こす
+      hash = "sha256-LJseClgoQ5C4x0z3CCTAVoh4NOb87rAnmF+1G0RYU7U=";
+    };
 
-        SOURCE_BIN="${sourcePkg}/share/icons/${baseTheme}/cursors/${targetIconName}"
-        if [ ! -f "$SOURCE_BIN" ]; then
-            echo "Error: Source icon ${targetIconName} not found!"
-            exit 1
-        fi
+    installPhase = ''
+      # Nixストア内にアイコンの標準パスを作成
+      mkdir -p $out/share/icons/Hacked-Black
 
-        for name in default left_ptr right_ptr hand1 hand2 xterm text cross \
-                    pointer wait progress help alias copy move no-drop not-allowed \
-                    all-scroll col-resize row-resize plus; do
-          cp "$SOURCE_BIN" $ICON_DIR/cursors/$name
-        done
-
-        cat <<EOF > $ICON_DIR/index.theme
-    [Icon Theme]
-    Name=${variantName}
-    Comment=Gapped Crosshair Precision Theme
-    Inherits=${baseTheme},Adwaita
-    EOF
-  '';
+      # 展開された中身をすべてコピー
+      cp -r * $out/share/icons/Hacked-Black/
+    '';
+  };
 in
-
 {
   home.pointerCursor = {
-    package = stableReticleTheme;
-    name = variantName;
-    size = 18;
+    package = hackedCustomCursor;
+    name = "Hacked-Black";
+    size = 28;
     gtk.enable = true;
     x11.enable = true;
   };
 
   wayland.windowManager.hyprland.settings.env = [
-    "XCURSOR_THEME,${variantName}"
-    "XCURSOR_SIZE,22"
-    "HYPRCURSOR_THEME,${variantName}"
-    "HYPRCURSOR_SIZE,22"
+    "XCURSOR_THEME,Hacked-Black"
+    "XCURSOR_SIZE,28"
+    "HYPRCURSOR_THEME,Hacked-Black"
+    "HYPRCURSOR_SIZE,28"
   ];
 }
