@@ -60,7 +60,7 @@
   };
 
   programs.fish.shellAbbrs = {
-    cat = "bat";
+    cat = "bat -p";
     ls = "eza";
     tree = "eza --tree";
     cd = "z";

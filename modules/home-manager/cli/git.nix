@@ -22,10 +22,15 @@
   programs.fish.shellAbbrs = {
     g = "git";
     ga = "git add";
-    gaa = "git add --all";
-    gc = "git commit -v";
-    gcmsg = "git commit -m";
-    gp = "git pull";
+    gaa = "git add -A";
+    gc = "git commit -m";
+    gsw = "git switch";
+    gsc = "git switch -c";
+    gp = "git push";
+    gl = "git pull";
+    gst = "git status";
+    gd = "git diff";
+    glog = "git log --oneline --graph --decorate --all";
     lg = "lazygit";
   };
 }
