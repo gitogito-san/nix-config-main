@@ -250,7 +250,7 @@ in
         "$mainMod, E, exec, ${pkgs.wlogout}/bin/wlogout"
         "$mainMod, L, exec, ${lock} -f --screenshots --clock --effect-blur 7x5 --indicator --fade-in 0.5 --font 'Noto Sans CJK JP'"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"
-        "$mainMod, M, exit,"
+        "$mainMod SHIFT, M, exit,"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
