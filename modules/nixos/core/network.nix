@@ -52,4 +52,5 @@
   };
 
   networking.firewall.checkReversePath = "loose";
+  networking.firewall.allowedTCPPorts = [ 5600 ];
 }
