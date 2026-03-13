@@ -44,6 +44,11 @@
         };
         clangd = {
           command = "clangd";
+          args = [
+            "--header-insertion=never"
+            "--background-index"
+            "--query-driver=/nix/store/*-clang-*/bin/clang++,/nix/store/*-gcc-*/bin/g++,clang++,g++"
+          ];
         };
         ruby-lsp = {
           command = "ruby-lsp";
@@ -78,6 +83,17 @@
           auto-format = true;
           language-servers = [
             "clangd"
+          ];
+          formatter = {
+            command = "clang-format";
+          };
+        }
+        {
+          name = "cpp";
+          auto-format = true;
+          language-servers = [
+            "clangd"
+            "typos"
           ];
           formatter = {
             command = "clang-format";
