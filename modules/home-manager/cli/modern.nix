@@ -61,15 +61,10 @@
 
   programs.fish.shellAbbrs = {
     cat = "bat -pp";
-    ls = "eza";
-    ll = "eza -l -g";
-    la = "eza -la -g";
-    tree = "eza --tree";
     cd = "z";
     grep = "rg";
     find = "fd";
     fetch = "fastfetch";
-    fk = "pay-respects";
     zj = "zellij";
   };
 }
