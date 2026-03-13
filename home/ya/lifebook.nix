@@ -10,6 +10,7 @@
     ../../modules/home-manager/desktop/addons/waybar.nix
     ../../modules/home-manager/desktop/addons/notification.nix
     ../../modules/home-manager/desktop/addons/valent.nix
+    ../../modules/home-manager/desktop/addons/activitywatch.nix
     ../../modules/home-manager/desktop/apps.nix
     ../../modules/home-manager/desktop/cursor.nix
     ../../modules/home-manager/desktop/fuzzel.nix
