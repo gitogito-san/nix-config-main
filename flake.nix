@@ -13,6 +13,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,6 +50,7 @@
       nixpkgs-2411,
       home-manager,
       home-manager-stable,
+      nixvim,
       agenix,
       stylix,
       stylix-stable,
@@ -79,7 +84,13 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.ya = ./home/ya/lifebook.nix;
+              users.ya = {
+                imports = [
+                  ./home/ya/lifebook.nix
+                  inputs.nixvim.homeModules.nixvim
+                  ./modules/home-manager/tui/nixvim.nix
+                ];
+              };
             };
           }
         ];
