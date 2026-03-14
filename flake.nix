@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-2411.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +42,6 @@
       self,
       nixpkgs,
       nixpkgs-stable,
-      nixpkgs-2411,
       home-manager,
       home-manager-stable,
       agenix,
@@ -95,16 +93,6 @@
           playit.nixosModules.default
           ./modules/nixos/services/uptime-kuma.nix
           ./modules/nixos/services/reading.nix
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  navidrome = nixpkgs-2411.legacyPackages.x86_64-linux.navidrome;
-                })
-              ];
-            }
-          )
           ./modules/nixos/services/navidrome.nix
           ./modules/nixos/services/samba.nix
           {
