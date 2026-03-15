@@ -130,6 +130,10 @@ in
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd = {
+      enable = true;
+      variables = [ "-all" ];
+    };
 
     settings = {
       "$mainMod" = "SUPER";
@@ -285,9 +289,6 @@ in
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
         # screenshot
-        # ", Print, exec, ${screenshotActive}"
-        # "SHIFT, Print, exec, ${screenshotAll}"
-        # "$mainMod, Print, exec, ${grim} -g \"$(${slurp})\" - | ${wlCopy}"
         ", Print, exec, ${screenshotActive}"
         "SHIFT, Print, exec, ${screenshotAll}"
         "$mainMod, Print, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
