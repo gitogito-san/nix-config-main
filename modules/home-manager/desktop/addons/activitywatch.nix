@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+
 {
   services.activitywatch = {
     enable = true;
-    watchers = pkgs.lib.mkForce {
+    watchers = lib.mkForce {
       awatcher = {
         package = pkgs.awatcher;
-        executable = "awatcher";
       };
     };
   };
