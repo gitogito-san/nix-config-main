@@ -9,4 +9,14 @@
       };
     };
   };
+
+  systemd.user.services.activitywatch-watcher-awatcher = {
+    Unit = {
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Restart = "always";
+      RestartSec = 3;
+    };
+  };
 }
