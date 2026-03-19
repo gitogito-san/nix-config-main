@@ -122,8 +122,12 @@ in
   services.swayidle = {
     enable = true;
     events = {
-      lock = lock;
-      before-sleep = lock;
+      "before-sleep" = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+    };
+  };
+  wayland.windowManager.sway.config = {
+    keybindings = {
+      "XF86PowerOff" = "exec ${pkgs.wlogout}/bin/wlogout";
     };
   };
 

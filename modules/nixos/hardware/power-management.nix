@@ -52,15 +52,20 @@
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
 
+  security.pam.services.swaylock = { };
+
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "lock";
     HandleLidSwitchDocked = "ignore";
-    HandlePowerKey = "suspend";
+    HandlePowerKey = "ignore";
   };
 
   environment.systemPackages = [
     pkgs.powertop
+    pkgs.swaylock
+    pkgs.wlogout
+    pkgs.swayidle
   ];
 
   fileSystems."/boot" = {
