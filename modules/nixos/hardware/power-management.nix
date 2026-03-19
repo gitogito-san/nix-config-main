@@ -25,13 +25,21 @@
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
       USB_AUTOSUSPEND = 1;
+
+      RUNTIME_PM_DENYLIST = "02:00.0";
     };
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelParams = [
     "amd_pstate=active"
     "resume=UUID=7bceb1ba-8c7c-4afa-a172-da2a029f7da3"
   ];
+
+  boot.extraModprobeConfig = ''
+    options rtw89_pci disable_aspm_l1=y disable_aspm_l1ss=y
+  '';
 
   hardware.enableRedistributableFirmware = true;
 
@@ -41,7 +49,6 @@
     }
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
 
@@ -67,16 +74,16 @@
     ];
   };
 
+  powerManagement.powerDownCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce || true
+    ${pkgs.kmod}/bin/modprobe -r rtw89_pci || true
+    ${pkgs.kmod}/bin/modprobe -r rtw89_core || true
+  '';
+
   powerManagement.resumeCommands = ''
-    ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce
-    ${pkgs.kmod}/bin/modprobe -r rtw89_pci
-
-    sleep 1
-
-    ${pkgs.kmod}/bin/modprobe rtw89_pci
-    ${pkgs.kmod}/bin/modprobe rtw89_8852ce
-
-    ${pkgs.systemd}/bin/systemctl restart NetworkManager
+    ${pkgs.kmod}/bin/modprobe rtw89_core || true
+    ${pkgs.kmod}/bin/modprobe rtw89_pci || true
+    ${pkgs.kmod}/bin/modprobe rtw89_8852ce || true
   '';
 
 }
