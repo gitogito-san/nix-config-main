@@ -14,19 +14,20 @@
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       CPU_DRIVER_OPTS_ON_AC = "amd_pstate=active";
       CPU_DRIVER_OPTS_ON_BAT = "amd_pstate=active";
-
       PCIE_ASPM_ON_AC = "default";
       PCIE_ASPM_ON_BAT = "default";
-
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
-
       PLATFORM_PROFILE_ON_AC = "performance";
       PLATFORM_PROFILE_ON_BAT = "low-power";
-
       USB_AUTOSUSPEND = 1;
-
       RUNTIME_PM_DENYLIST = "02:00.0";
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
 
@@ -35,6 +36,7 @@
   boot.kernelParams = [
     "amd_pstate=active"
     "resume=UUID=7bceb1ba-8c7c-4afa-a172-da2a029f7da3"
+    "nmi_watchdog=0"
   ];
 
   boot.extraModprobeConfig = ''
@@ -78,6 +80,8 @@
       "x-systemd.automount"
     ];
   };
+
+  powerManagement.enable = true;
 
   powerManagement.powerDownCommands = ''
     ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce || true

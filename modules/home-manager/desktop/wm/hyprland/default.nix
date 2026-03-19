@@ -124,6 +124,17 @@ in
     events = {
       "before-sleep" = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
     };
+    timeouts = [
+      {
+        timeout = 300;
+        command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+        resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+      }
+      {
+        timeout = 600;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
+    ];
   };
   wayland.windowManager.sway.config = {
     keybindings = {
