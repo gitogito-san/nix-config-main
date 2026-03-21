@@ -19,6 +19,41 @@
           select = "underline";
         };
         indent-guides.render = true;
+        color-modes = true;
+        bufferline = "multiple";
+        auto-save = true;
+        whitespace.render = {
+          space = "none";
+          tab = "all";
+          newline = "none";
+          nbsp = "all";
+        };
+        whitespace.characters = {
+          tab = "→";
+          nbsp = "⍽";
+        };
+        statusline = {
+          left = [
+            "mode"
+            "spinner"
+          ];
+          center = [ "file-name" ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "file-encoding"
+            "file-line-ending"
+            "file-type"
+          ];
+          separator = "│";
+          mode.normal = "NORMAL";
+          mode.insert = "INSERT";
+          mode.select = "SELECT";
+        };
+        file-picker = {
+          hidden = false;
+        };
       };
     };
 
@@ -52,6 +87,14 @@
         };
         ruby-lsp = {
           command = "ruby-lsp";
+        };
+        pyright = {
+          command = "pyright-langserver";
+          args = [ "--stdio" ];
+        };
+        ruff = {
+          command = "ruff";
+          args = [ "server" ];
         };
       };
 
@@ -108,6 +151,26 @@
           ];
           formatter = {
             command = "rufo";
+          };
+        }
+        {
+          name = "python";
+          auto-format = true;
+          language-servers = [
+            "pyright"
+            "ruff"
+            "typos"
+          ];
+          formatter = {
+            command = "ruff";
+            args = [
+              "format"
+              "-"
+            ];
+          };
+          indent = {
+            tab-width = 4;
+            unit = "    ";
           };
         }
       ];
