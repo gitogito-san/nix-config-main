@@ -32,6 +32,7 @@
 
   environment.systemPackages = [
     pkgs.git
+    pkgs.ente-auth
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -43,4 +44,7 @@
     options = "--delete-older-than 7d";
   };
   nix.settings.auto-optimise-store = true;
+
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
 }
