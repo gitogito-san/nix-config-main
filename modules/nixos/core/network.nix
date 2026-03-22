@@ -10,6 +10,8 @@
     ];
   };
 
+  services.resolved.enable = true;
+
   services.strongswan.enable = true;
   services.xl2tpd.enable = true;
   environment.systemPackages = [
