@@ -22,7 +22,10 @@ in
     package = hackedCustomCursor;
     name = "Hacked-Black";
     size = 28;
-    gtk.enable = true;
+    gtk = {
+      enable = true;
+      gtk4.theme = null;
+    };
     x11.enable = true;
   };
 
