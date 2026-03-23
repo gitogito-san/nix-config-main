@@ -38,12 +38,14 @@
   nixpkgs.config.allowUnfree = true;
 
   # Optimization
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
-  nix.settings.auto-optimise-store = true;
 
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
