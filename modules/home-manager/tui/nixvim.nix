@@ -41,10 +41,10 @@
     # 外部依存パッケージ (Dependencies)
     # ==========================================
     # [重要] Telescopeを正常に動かすための裏方バイナリを追加
-    extraPackages = with pkgs; [
-      wl-clipboard
-      fd # find_files を爆速にするためのツール
-      ripgrep # live_grep (文字列検索) を動かすために【必須】
+    extraPackages = [
+      pkgs.wl-clipboard
+      pkgs.fd # find_files を爆速にするためのツール
+      pkgs.ripgrep # live_grep (文字列検索) を動かすために【必須】
     ];
 
     # ==========================================

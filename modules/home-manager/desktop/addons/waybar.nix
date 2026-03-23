@@ -322,7 +322,7 @@ in
   };
 
   services.playerctld.enable = true;
-  home.packages = with pkgs; [
-    playerctl
+  home.packages = [
+    pkgs.playerctl
   ];
 }
