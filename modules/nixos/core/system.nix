@@ -22,12 +22,21 @@
   console.keyMap = "jp106";
 
   # Nix Settings
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    warn-dirty = false;
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      warn-dirty = false;
+      auto-optimise-store = true;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   environment.systemPackages = [
@@ -38,15 +47,6 @@
   nixpkgs.config.allowUnfree = true;
 
   # Optimization
-  nix = {
-    settings.auto-optimise-store = true;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
-
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 }
