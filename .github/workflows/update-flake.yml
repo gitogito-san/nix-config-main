@@ -1,21 +1,29 @@
-name: update-flake-lock
+name: Update Flake Lock
+
 on:
   schedule:
-    - cron: '0 18 * * 0' 
+    - cron: '0 0 * * 0'
   workflow_dispatch: 
 
 jobs:
-  update-flake-lock:
+  lockfile-update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install Nix
-        uses: cachix/install-nix-action@v27
+        uses: cachix/install-nix-action@v26
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v24
         with:
-          pr-title: "chore: update flake.lock" 
-          pr-labels: |                         
+          pr-title: "chore: update flake.lock"
+          pr-labels: |
             dependencies
             automated
+          token: ${{ secrets.GITHUB_TOKEN }}
