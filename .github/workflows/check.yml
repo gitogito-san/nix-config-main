@@ -1,0 +1,30 @@
+name: Nix Flake Check & Lint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  evaluate-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify Flake configuration (nix flake check)
+        run: nix flake check --show-trace
+
+      - name: Enforce Anti-pattern Checks (statix)
+        run: nix run nixpkgs#statix -- check .
+
+      - name: Enforce Dead Code Elimination (deadnix)
+        run: nix run nixpkgs#deadnix -- --fail .
