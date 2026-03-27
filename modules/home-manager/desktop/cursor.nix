@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   hackedCustomCursor = pkgs.stdenv.mkDerivation {
@@ -22,11 +22,11 @@ in
     package = hackedCustomCursor;
     name = "Hacked-Black";
     size = 28;
-    gtk = {
-      enable = true;
-      gtk4.theme = null;
-    };
-    x11.enable = true;
+    gtk.enable = true;
+    x11.enable = false;
+  };
+  gtk = {
+    gtk4.theme = null;
   };
 
   wayland.windowManager.hyprland.settings.env = [
