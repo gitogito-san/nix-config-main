@@ -17,7 +17,6 @@ in
 
         modules-left = [
           "hyprland/workspaces"
-          "niri/workspaces"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -30,19 +29,8 @@ in
         ];
 
         "hyprland/workspaces" = {
-          format = "{icon}";
+          format = "{name}";
           on-click = "activate";
-          "active" = "●";
-          "default" = "○";
-          "urgent" = "";
-        };
-
-        "niri/workspaces" = {
-          format = "{icon}";
-          format-icons = {
-            default = "○";
-            active = "●";
-          };
         };
 
         "clock" = {
@@ -62,7 +50,6 @@ in
         };
 
         "backlight" = {
-          device = "intel_backlight";
           format = "{percent}% {icon}";
           format-icons = [
             ""
@@ -119,7 +106,7 @@ in
         };
 
         "disk" = {
-          interval = 600;
+          interval = 3600;
           format = "Disk {percentage_used}% ";
           path = "/";
         };
@@ -179,7 +166,6 @@ in
         modules-center = [ "hyprland/window" ];
         modules-right = [
           "network"
-          "hyprland/language"
           "custom/power"
         ];
 
@@ -199,12 +185,6 @@ in
 
         "hyprland/window" = {
           max-length = 50;
-        };
-
-        "hyprland/language" = {
-          format = " {}";
-          format-en = "US";
-          format-ja = "JP";
         };
 
         "network" = {
