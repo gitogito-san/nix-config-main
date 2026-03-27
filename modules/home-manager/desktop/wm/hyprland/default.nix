@@ -136,11 +136,6 @@ in
       }
     ];
   };
-  wayland.windowManager.sway.config = {
-    keybindings = {
-      "XF86PowerOff" = "exec ${pkgs.wlogout}/bin/wlogout";
-    };
-  };
 
   # Hyprland
   wayland.windowManager.hyprland = {
@@ -148,6 +143,12 @@ in
     systemd = {
       enable = true;
       variables = [ "-all" ];
+    };
+
+    config = {
+      keybindings = {
+        "XF86PowerOff" = "exec ${pkgs.wlogout}/bin/wlogout";
+      };
     };
 
     settings = {
