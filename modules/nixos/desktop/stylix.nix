@@ -60,4 +60,10 @@ in
   };
 
   stylix.enableReleaseChecks = false;
+
+  systemd.user.services.hyprpaper = {
+    serviceConfig = {
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
+    };
+  };
 }
