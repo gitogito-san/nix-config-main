@@ -16,7 +16,7 @@
       root = "/var/www/timetable";
 
       locations."/api/" = {
-        proxyPass = "http://127.0.0.1:3000";
+        proxyPass = "http://127.0.0.1:3002";
       };
     };
   };
@@ -36,6 +36,8 @@
       StateDirectory = "timetable-backend";
     };
   };
+
+  services.resolved.extraConfig = "DNSStubListener=no";
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 8080 ];
 }
