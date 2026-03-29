@@ -145,12 +145,6 @@ in
       variables = [ "-all" ];
     };
 
-    config = {
-      keybindings = {
-        "XF86PowerOff" = "exec ${pkgs.wlogout}/bin/wlogout";
-      };
-    };
-
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = terminal;
@@ -319,6 +313,8 @@ in
         "$mainMod CTRL, right, resizeactive, 40 0"
         "$mainMod CTRL, up, resizeactive, 0 -40"
         "$mainMod CTRL, down, resizeactive, 0 40"
+
+        ", XF86PowerOff, exec, ${pkgs.wlogout}/bin/wlogout"
       ];
 
       # binde / bindl
