@@ -4,6 +4,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/core
+    ../../modules/nixos/core/network-common.nix
+    ../../modules/nixos/core/network-server.nix
     ../../modules/nixos/desktop/stylix.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/adguard.nix

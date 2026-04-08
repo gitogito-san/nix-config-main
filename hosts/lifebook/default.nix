@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/core
+    ../../modules/nixos/core/network-common.nix
     ../../modules/nixos/gaming/steam.nix
     ../../modules/nixos/hardware/keyboards.nix
     ../../modules/nixos/hardware/power-management.nix
