@@ -4,7 +4,7 @@ let
 in
 
 {
-  environment.systemPackages = [ pkgs.swww ];
+  environment.systemPackages = [ pkgs.awww ];
 
   stylix = {
     enable = true;

@@ -252,7 +252,7 @@ in
       };
 
       exec-once = [
-        "swww-daemon"
+        "awww-daemon"
         "bash -c 'sleep 3; while true; do ${pkgs.waybar}/bin/waybar; sleep 2; done' &"
         "fcitx5 -d"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
