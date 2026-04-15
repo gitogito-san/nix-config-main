@@ -65,7 +65,6 @@
 
   environment.systemPackages = [
     pkgs.powertop
-    pkgs.swaylock
     pkgs.wlogout
     pkgs.swayidle
   ];

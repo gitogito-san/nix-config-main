@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   fileManager = "${pkgs.thunar}/bin/thunar";
-  lock = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --font 'Noto Sans CJK JP'";
+  lock = "${pkgs.hyprlock}/bin/hyprlock";
 
   # Tools
   jq = "${pkgs.jq}/bin/jq";
@@ -76,6 +76,31 @@ let
       nohup firefox --new-window "$URL" >/dev/null 2>&1 &
     fi
   '';
+
+  hyprlockMedia = pkgs.writeShellScript "hyprlock-media" ''
+    STATUS=$(${pkgs.playerctl}/bin/playerctl status 2>/dev/null)
+    if [[ "$STATUS" == "Playing" ]]; then
+      ${pkgs.playerctl}/bin/playerctl metadata --format '  {{title}} / {{artist}}'
+    elif [[ "$STATUS" == "Paused" ]]; then
+      ${pkgs.playerctl}/bin/playerctl metadata --format '  <i>{{title}} / {{artist}}</i>'
+    else
+      echo " "
+    fi
+  '';
+  hyprlockBattery = pkgs.writeShellScript "hyprlock-battery" ''
+    CAP=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT1/capacity 2>/dev/null || echo "0")
+    STAT=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT1/status 2>/dev/null || echo "Unknown")
+
+    if [ "$STAT" = "Charging" ]; then
+      echo "󰂄 $CAP%"
+    elif [ "$CAP" -le 20 ]; then
+      echo "󰂃 $CAP%"
+    elif [ "$CAP" -le 50 ]; then
+      echo "󰁾 $CAP%"
+    else
+      echo "󰁹 $CAP%"
+    fi
+  '';
 in
 
 {
@@ -90,7 +115,6 @@ in
     pkgs.cliphist
     pkgs.grim
     pkgs.slurp
-    pkgs.swaylock-effects
     pkgs.jq
     pkgs.zenity
     (pkgs.tesseract.override {
@@ -118,11 +142,82 @@ in
     };
   };
 
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      background = pkgs.lib.mkForce [
+        {
+          monitor = "";
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+      label = pkgs.lib.mkForce [
+        {
+          monitor = "";
+          text = "$TIME";
+          font_size = 130;
+          font_family = "Noto Sans CJK JP Bold";
+          position = "80, -80";
+          halign = "left";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:60000] ${pkgs.coreutils}/bin/date +'%Y年 %m月 %d日 (%a)'";
+          font_size = 20;
+          font_family = "Noto Sans CJK JP";
+          position = "95, -300";
+          halign = "left";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:2000] ${hyprlockMedia}";
+          font_size = 14;
+          font_family = "Noto Sans CJK JP";
+          position = "-80, -80";
+          halign = "right";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:5000] ${hyprlockBattery}";
+          font_size = 18;
+          font_family = "Noto Sans CJK JP";
+          position = "-85, 150";
+          halign = "right";
+          valign = "bottom";
+        }
+      ];
+      input-field = pkgs.lib.mkForce [
+        {
+          monitor = "";
+          size = "280, 60";
+          outline_thickness = 2;
+          dots_size = 0.2;
+          dots_spacing = 0.3;
+          dots_center = true;
+          outer_color = "rgba(0, 0, 0, 0)";
+          inner_color = "rgba(255, 255, 255, 0.1)";
+          font_color = "rgb(200, 200, 200)";
+          fade_on_empty = true;
+          placeholder_text = "";
+          position = "-80, 80";
+          halign = "right";
+          valign = "bottom";
+        }
+      ];
+    };
+  };
+
   # lock password
   services.swayidle = {
     enable = true;
     events = {
-      "before-sleep" = "${pkgs.swaylock}/bin/swaylock -f -c 000000";
+      "before-sleep" = "${lock}";
+      "lock" = "${lock}";
     };
     timeouts = [
       {
@@ -142,7 +237,6 @@ in
     enable = true;
     systemd = {
       enable = true;
-      variables = [ "-all" ];
     };
 
     settings = {
@@ -262,7 +356,7 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, S, exec, ${webSearch}/bin/web-search"
         "$mainMod, E, exec, ${pkgs.wlogout}/bin/wlogout"
-        "$mainMod, L, exec, ${lock} -f --screenshots --clock --effect-blur 7x5 --indicator --fade-in 0.5 --font 'Noto Sans CJK JP'"
+        "$mainMod, L, exec, ${lock}"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"
         "$mainMod SHIFT, M, exit,"
 
