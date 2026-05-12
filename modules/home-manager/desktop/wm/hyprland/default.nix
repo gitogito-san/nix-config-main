@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
@@ -213,23 +213,31 @@ in
   };
 
   # lock password
-  services.swayidle = {
+  services.hypridle = {
     enable = true;
-    events = {
-      "before-sleep" = "${lock}";
-      "lock" = "${lock}";
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+        before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+        after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 290;
+          on-timeout = "${pkgs.systemd}/bin/loginctl lock-session";
+        }
+        {
+          timeout = 300;
+          on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 600;
+          on-timeout = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
     };
-    timeouts = [
-      {
-        timeout = 300;
-        command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      }
-      {
-        timeout = 600;
-        command = "${pkgs.systemd}/bin/systemctl suspend";
-      }
-    ];
   };
 
   # Hyprland
@@ -349,6 +357,8 @@ in
 
       # bind
       bind = [
+        ", XF86MonBrightnessUp, exec, ${brightnessctl} set 5%+"
+        ", XF86MonBrightnessDown, exec, ${brightnessctl} set 5%-"
         "$mainMod, RETURN, exec, $terminal"
         "$mainMod SHIFT, Return, exec, ${toggleTerm}/bin/toggle-term"
         "$mainMod, Q, killactive,"
@@ -415,8 +425,6 @@ in
       binde = [
         ", XF86AudioRaiseVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86MonBrightnessUp, exec, ${brightnessctl} set 5%+"
-        ", XF86MonBrightnessDown, exec, ${brightnessctl} set 5%-"
       ];
 
       bindl = [

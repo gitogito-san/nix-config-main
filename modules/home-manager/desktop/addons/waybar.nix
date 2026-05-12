@@ -25,6 +25,7 @@ in
           "group/hardware"
           "battery"
           "custom/notification"
+          "idle_inhibitor"
           "tray"
         ];
 
@@ -50,6 +51,7 @@ in
         };
 
         "backlight" = {
+          device = "amdgpu_bl1";
           format = "{percent}% {icon}";
           format-icons = [
             ""
@@ -62,8 +64,7 @@ in
             ""
             ""
           ];
-          on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
-          on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+          scroll-step = 5.0;
           min-length = 6;
         };
 
@@ -148,6 +149,16 @@ in
           on-click = "swaync-client -t -sw";
           on-click-right = "swaync-client -d -sw";
           escape = true;
+        };
+
+        "idle_inhibitor" = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
+          tooltip-format-activated = "スリープ防止: オン";
+          tooltip-format-deactivated = "スリープ防止: オフ";
         };
 
         "tray" = {

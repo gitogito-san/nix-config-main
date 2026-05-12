@@ -54,7 +54,7 @@
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
 
-  security.pam.services.swaylock = { };
+  security.pam.services.hyprlock = { };
 
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
