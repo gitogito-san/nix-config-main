@@ -256,7 +256,7 @@ in
 
       misc = {
         vfr = true;
-        vrr = 1;
+        vrr = 0;
       };
 
       exec-once = [

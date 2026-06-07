@@ -29,10 +29,13 @@ in
     gtk4.theme = null;
   };
 
-  wayland.windowManager.hyprland.settings.env = [
-    "XCURSOR_THEME,Hacked-Black"
-    "XCURSOR_SIZE,28"
-    "HYPRCURSOR_THEME,Hacked-Black"
-    "HYPRCURSOR_SIZE,28"
-  ];
+  wayland.windowManager.hyprland.settings = {
+    env = [
+      "XCURSOR_THEME,Hacked-Black"
+      "XCURSOR_SIZE,28"
+      "HYPRCURSOR_THEME,Hacked-Black"
+      "HYPRCURSOR_SIZE,28"
+      "WLR_NO_HARDWARE_CURSORS,1"
+    ];
+  };
 }
