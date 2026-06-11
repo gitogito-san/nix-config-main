@@ -96,6 +96,9 @@
           command = "ruff";
           args = [ "server" ];
         };
+        tinymist = {
+          command = "${pkgs.tinymist}/bin/tinymist";
+        };
       };
 
       language = [
@@ -171,6 +174,17 @@
           indent = {
             tab-width = 4;
             unit = "    ";
+          };
+        }
+        {
+          name = "typst";
+          auto-format = true;
+          language-servers = [
+            "tinymist"
+            "typos"
+          ];
+          formatter = {
+            command = "${pkgs.typstyle}/bin/typstyle";
           };
         }
       ];
