@@ -6,7 +6,10 @@
 
     shellAbbrs = {
       del = "clear";
-      update = "pushd ~/nix-config && git pull && sudo nixos-rebuild switch --flake . && popd";
+      update-local = "pushd ~/nix-config && git pull && sudo nixos-rebuild switch --flake . && popd";
+      deploy-server = "deploy .#trigkey";
+      ssh-sol = "autossh -M 0 sol";
+      ssh-ced = "autossh -M 0 ced";
     };
     functions = {
       ytdl = ''
