@@ -11,4 +11,7 @@
       PermitRootLogin = "no";
     };
   };
+
+  # permit sudo
+  security.sudo.wheelNeedsPassword = false;
 }
