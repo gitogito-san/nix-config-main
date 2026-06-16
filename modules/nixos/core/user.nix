@@ -16,6 +16,9 @@
       "network"
     ];
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQudxqP1y+lmBwCpPE+JkpdVHK9FPw8n0IibALGEbwL ya@nixos"
+    ];
   };
 
   nix.settings.trusted-users = [
