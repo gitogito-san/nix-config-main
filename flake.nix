@@ -154,7 +154,7 @@
             };
           };
           deploy.nodes.trigkey = {
-            hostname = "100.90.113.106";
+            hostname = "ya";
             profiles.system = {
               sshUser = "ya";
               user = "root";
