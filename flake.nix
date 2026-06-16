@@ -105,6 +105,7 @@
                 inputs.home-manager.nixosModules.default
                 inputs.agenix.nixosModules.default
                 inputs.stylix.nixosModules.stylix
+                inputs.nix-index-database.nixosModules.nix-index
                 {
                   home-manager = {
                     useGlobalPkgs = true;
@@ -114,7 +115,6 @@
                       imports = [
                         ./home/ya/lifebook.nix
                         inputs.nixvim.homeModules.nixvim
-                        inputs.nix-index-database.nixosModules.nix-index
                         ./modules/home-manager/tui/nixvim.nix
                       ];
                     };
