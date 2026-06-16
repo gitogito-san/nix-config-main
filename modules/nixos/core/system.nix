@@ -49,4 +49,6 @@
   # Optimization
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
+
+  programs.nix-index-database.comma.enable = true;
 }

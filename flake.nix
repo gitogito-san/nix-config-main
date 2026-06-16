@@ -45,6 +45,10 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -110,6 +114,7 @@
                       imports = [
                         ./home/ya/lifebook.nix
                         inputs.nixvim.homeModules.nixvim
+                        inputs.nix-index-database.nixosModules.nix-index
                         ./modules/home-manager/tui/nixvim.nix
                       ];
                     };
@@ -128,6 +133,7 @@
                 inputs.agenix.nixosModules.default
                 inputs.stylix-stable.nixosModules.stylix
                 inputs.playit.nixosModules.default
+                inputs.nix-index-database.nixosModules.nix-index
                 ./modules/nixos/services/uptime-kuma.nix
                 ./modules/nixos/services/reading.nix
                 (
