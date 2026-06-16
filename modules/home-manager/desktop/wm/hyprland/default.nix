@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  terminal = "${pkgs.alacritty}/bin/alacritty";
+  terminal = "${pkgs.foot}/bin/foot";
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   fileManager = "${pkgs.thunar}/bin/thunar";
   lock = "${pkgs.hyprlock}/bin/hyprlock";
@@ -52,10 +52,10 @@ let
   '';
 
   # scratchpad
+  scratchpadCmd = "${terminal} --app-id=scratchpad";
   toggleTerm = pkgs.writeShellScriptBin "toggle-term" ''
-
     if ! ${pkgs.hyprland}/bin/hyprctl clients -j | ${jq} -e '.[] | select(.class == "scratchpad")' > /dev/null; then
-      ${pkgs.hyprland}/bin/hyprctl dispatch exec "[workspace special:scratch;float;] ${pkgs.alacritty}/bin/alacritty --class scratchpad"
+      ${pkgs.hyprland}/bin/hyprctl dispatch exec "[workspace special:scratch;float;] ${scratchpadCmd}"
     else
       ${pkgs.hyprland}/bin/hyprctl dispatch togglespecialworkspace scratch
     fi
@@ -63,14 +63,13 @@ let
 
   # web search
   webSearch = pkgs.writeShellScriptBin "web-search" ''
-    QUERY=$(echo "" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt "  Search: ")
+    QUERY=$(${pkgs.zenity}/bin/zenity --entry --title="Google Search" --text=" 検索ワードを入力:" --width=400)
     if [ -z "$QUERY" ]; then
       exit 0
     fi
     URL="https://www.google.com/search?q=$QUERY"
     if ${pkgs.hyprland}/bin/hyprctl clients -j | ${jq} -e '.[] | select(.class == "firefox")' > /dev/null; then
       ${pkgs.hyprland}/bin/hyprctl dispatch focuswindow "class:^(firefox)$"
-      
       nohup firefox --new-tab "$URL" >/dev/null 2>&1 &
     else
       nohup firefox --new-window "$URL" >/dev/null 2>&1 &
@@ -133,13 +132,9 @@ in
     webSearch
   ];
 
-  programs.alacritty = {
+  programs.foot = {
     enable = true;
-    settings = {
-      window = {
-        decorations = "None";
-      };
-    };
+    server.enable = true;
   };
 
   programs.hyprlock = {

@@ -1,10 +1,13 @@
 { pkgs, ... }:
+let
+  terminal = "${pkgs.foot}/bin/foot";
+in
 {
   programs.fuzzel = {
     enable = true;
     settings = {
       main = {
-        terminal = "${pkgs.alacritty}/bin/alacritty";
+        terminal = terminal;
         width = 40;
       };
     };
