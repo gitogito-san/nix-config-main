@@ -13,7 +13,6 @@
     ../../modules/nixos/desktop/dm/greetd.nix
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/addons/fcitx5.nix
-    ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/ollama.nix
     ../../modules/nixos/services/thunar.nix
     ../../modules/nixos/services/valent.nix
