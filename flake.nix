@@ -41,6 +41,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -77,6 +81,7 @@
             devShells.default = pkgs.mkShell {
               packages = [
                 inputs.agenix.packages.${system}.default
+                inputs.deploy-rs.packages.${system}.deploy-rs
                 pkgs.statix
                 pkgs.deadnix
                 pkgs.nixfmt
@@ -147,10 +152,16 @@
                 }
               ];
             };
-
+          };
+          deploy.nodes.trigkey = {
+            hostname = "100.90.113.106";
+            profiles.system = {
+              sshUser = "ya";
+              user = "root";
+              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.trigkey;
+            };
           };
         };
-
       }
     );
 }
