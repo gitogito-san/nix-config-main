@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = [
+    pkgs.autossh
+  ];
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -9,6 +12,11 @@
       "*" = {
         serverAliveInterval = 60;
         serverAliveCountMax = 5;
+        extraOptions = {
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/%C";
+          ControlPersist = "10m";
+        };
       };
 
       ya = {
