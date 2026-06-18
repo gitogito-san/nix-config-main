@@ -89,9 +89,14 @@
   '';
 
   powerManagement.resumeCommands = ''
+    # Wi-Fi 
     ${pkgs.kmod}/bin/modprobe rtw89_core || true
     ${pkgs.kmod}/bin/modprobe rtw89_pci || true
     ${pkgs.kmod}/bin/modprobe rtw89_8852ce || true
+
+    # Trackpad 
+    ${pkgs.kmod}/bin/modprobe -r i2c_hid_acpi || true
+    ${pkgs.kmod}/bin/modprobe i2c_hid_acpi || true
   '';
 
 }
