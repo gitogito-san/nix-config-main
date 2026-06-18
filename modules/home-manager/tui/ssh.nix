@@ -3,6 +3,7 @@
 {
   home.packages = [
     pkgs.autossh
+    pkgs.mosh
   ];
   programs.ssh = {
     enable = true;

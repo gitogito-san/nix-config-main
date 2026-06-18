@@ -62,4 +62,7 @@
       RemainAfterExit = true;
     };
   };
+
+  # mosh
+  programs.mosh.enable = true;
 }
