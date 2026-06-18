@@ -1,18 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   font = "Hack Nerd Font";
 in
-
 {
   programs.waybar = {
     enable = true;
+    systemd = {
+      enable = true;
+      targets = [ "hyprland-session.target" ];
+    };
     settings = [
       {
         name = "topbar";
         layer = "top";
         position = "top";
-        height = 20;
+        height = 25;
         spacing = 10;
 
         modules-left = [
@@ -53,6 +56,10 @@ in
         "backlight" = {
           device = "amdgpu_bl1";
           format = "{percent}% {icon}";
+          interval = 1;
+          states = {
+            "high" = 100;
+          };
           format-icons = [
             ""
             ""
@@ -64,7 +71,7 @@ in
             ""
             ""
           ];
-          scroll-step = 5.0;
+          scroll-step = 1.0;
           min-length = 6;
         };
 
@@ -309,7 +316,10 @@ in
          to { color: #ffffff; }
        }
     '';
-
+  };
+  systemd.user.services.waybar.Service = {
+    Restart = lib.mkForce "always";
+    RestartSec = lib.mkForce 1;
   };
 
   services.playerctld.enable = true;
