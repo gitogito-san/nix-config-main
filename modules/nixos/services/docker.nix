@@ -1,8 +1,16 @@
 { pkgs, ... }:
 
 {
-  virtualisation.docker.enable = true;
-  virtualisation.oci-containers.backend = "docker";
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    # defaultNetwork.settings.dns_enabled = true;
+  };
+  virtualisation.oci-containers.backend = "podman";
 
-  users.users.ya.extraGroups = [ "docker" ];
+  # docker の代替である podman に乗り換え
+  # virtualisation.docker.enable = true;
+  # virtualisation.oci-containers.backend = "docker";
+
+  # users.users.ya.extraGroups = [ "docker" ];
 }
