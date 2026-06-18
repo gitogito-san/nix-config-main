@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  terminal = "${pkgs.foot}/bin/foot";
+  terminal = "${pkgs.foot}/bin/footclient";
 in
 {
   programs.fuzzel = {

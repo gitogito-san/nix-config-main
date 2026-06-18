@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  terminal = "${pkgs.foot}/bin/foot";
+  terminal = "${pkgs.foot}/bin/footclient";
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   fileManager = "${pkgs.thunar}/bin/thunar";
   lock = "${pkgs.hyprlock}/bin/hyprlock";
@@ -256,7 +256,6 @@ in
 
       exec-once = [
         "awww-daemon"
-        "bash -c 'sleep 3; while true; do ${pkgs.waybar}/bin/waybar; sleep 2; done' &"
         "fcitx5 -d"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.blueman}/bin/blueman-applet"
