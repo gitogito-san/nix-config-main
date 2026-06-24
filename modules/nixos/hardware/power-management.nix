@@ -43,6 +43,8 @@
     options rtw89_pci disable_aspm_l1=y disable_aspm_l1ss=y
   '';
 
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
   hardware.enableRedistributableFirmware = true;
 
   swapDevices = [
