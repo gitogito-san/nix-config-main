@@ -249,6 +249,15 @@ in
 
       source = "~/.config/hypr/monitors.conf";
 
+      monitor = ", preferred, auto, 1"; # 保険
+
+      workspace = [
+        "1, monitor:eDP-1, persistent:true, default:true"
+        "2, monitor:DP-1, persistent:true, default:true"
+        "3, monitor:HDMI-A-1, persistent:true, default:true"
+        "4, monitor:DP-2, persistent:true, default:true"
+      ];
+
       misc = {
         vfr = true;
         vrr = 0;
@@ -353,6 +362,7 @@ in
       bind = [
         ", XF86MonBrightnessUp, exec, ${brightnessctl} set 5%+"
         ", XF86MonBrightnessDown, exec, ${brightnessctl} set 5%-"
+
         "$mainMod, RETURN, exec, $terminal"
         "$mainMod SHIFT, Return, exec, ${toggleTerm}/bin/toggle-term"
         "$mainMod, Q, killactive,"
@@ -363,6 +373,7 @@ in
         "$mainMod, L, exec, ${lock}"
         "$mainMod, V, exec, ${cliphist} list | ${menu} -d -w 80% | ${cliphist} decode | ${wlCopy}"
         "$mainMod SHIFT, M, exit,"
+        "$mainMod SHIFT, P, exec, ${pkgs.hyprland}/bin/hyprctl keyword monitor ',preferred,auto,1'"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
@@ -415,15 +426,26 @@ in
         ", XF86PowerOff, exec, ${pkgs.wlogout}/bin/wlogout"
       ];
 
-      # binde / bindl
+      # binde
       binde = [
         ", XF86AudioRaiseVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
+      # bindl
       bindl = [
         ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioMicMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+        ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
+        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ];
+
+      # bindm
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
       ];
     };
   };
