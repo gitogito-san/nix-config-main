@@ -26,10 +26,7 @@
       updatetime = 250;
       timeout = true;
       timeoutlen = 300;
-
-      # [追加] LSPの警告が出た際に画面が横にガタつくのを防ぐ
       signcolumn = "yes";
-      # [追加] 現在の行をハイライトして視認性を上げる
       cursorline = true;
     };
 
