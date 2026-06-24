@@ -15,7 +15,7 @@ in
         name = "topbar";
         layer = "top";
         position = "top";
-        height = 25;
+        height = 22;
         spacing = 10;
 
         modules-left = [
@@ -45,7 +45,8 @@ in
         "wireplumber" = {
           format = "{volume}% {icon}";
           format-muted = "󰝟";
-          on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click-right = "${pkgs.pavucontrol}/bin/pavucontrol";
           format-icons = [
             ""
             ""
@@ -211,7 +212,7 @@ in
           format-ethernet = "<span color='#7dcfff'>↓{bandwidthDownBytes}</span> <span color='#bb9af7'>↑{bandwidthUpBytes}</span> {ipaddr} ";
           format-disconnected = "⚠ Disconnected";
           tooltip-format = "{ifname} via {gwaddr}";
-          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          on-click-right = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
           min-length = 30;
           justify = "center";
         };
