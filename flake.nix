@@ -161,9 +161,11 @@
           };
           deploy.nodes.trigkey = {
             hostname = "ya";
+            fastConnection = true;
             profiles.system = {
               sshUser = "ya";
               user = "root";
+              remoteBuild = true;
               path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.trigkey;
             };
           };
