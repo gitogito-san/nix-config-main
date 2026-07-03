@@ -14,6 +14,19 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    # hyprspace = {
+    #   url = "github:KZDKM/Hyprspace";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+    # hyprsplit = {
+    #   url = "github:shezdy/hyprsplit";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
