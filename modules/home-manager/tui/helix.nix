@@ -99,6 +99,9 @@
         tinymist = {
           command = "${pkgs.tinymist}/bin/tinymist";
         };
+        asm-lsp = {
+          command = "asm-lsp";
+        };
       };
 
       language = [
@@ -185,6 +188,23 @@
           ];
           formatter = {
             command = "${pkgs.typstyle}/bin/typstyle";
+          };
+        }
+        {
+          name = "gas";
+          scope = "source.s";
+          file-types = [
+            "s"
+            "asm"
+            "mips"
+          ];
+          language-servers = [
+            "asm-lsp"
+            "typos"
+          ];
+          indent = {
+            tab-width = 8;
+            unit = "\t";
           };
         }
       ];
