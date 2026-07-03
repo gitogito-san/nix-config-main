@@ -25,9 +25,7 @@ in
     gtk.enable = true;
     x11.enable = false;
   };
-  gtk = {
-    gtk4.theme = null;
-  };
+  gtk = { };
 
   wayland.windowManager.hyprland.settings = {
     env = [
