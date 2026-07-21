@@ -44,6 +44,7 @@ in
   home.packages = [
     pkgs.autossh
     pkgs.mosh
+    pkgs.wakeonlan
   ];
   programs.ssh = {
     enable = true;

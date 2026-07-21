@@ -10,6 +10,7 @@
       deploy-server = "deploy .#trigkey";
       ssh-sol = "autossh -M 0 sol";
       ssh-ced = "autossh -M 0 ced";
+      wake-pc = "wakeonlan FC:9D:05:30:D3:C6";
     };
     functions = {
       ytdl = ''
