@@ -17,13 +17,7 @@ in
     enable = true;
     settings = {
       default_session = {
-        command = ''
-          ${pkgs.tuigreet}/bin/tuigreet \
-            --time \
-            --remember \
-            --remember-session \
-            --sessions ${sessionDir}
-        '';
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${sessionDir}";
         user = "greeter";
       };
     };
