@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   terminal = "${pkgs.foot}/bin/footclient";
@@ -238,9 +238,14 @@ in
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     systemd = {
       enable = true;
     };
+    plugins = [
+      # inputs.hyprspace.packages.${pkgs.system}.default
+      # inputs.hyprsplit.packages.${pkgs.system}.default
+    ];
 
     settings = {
       "$mainMod" = "SUPER";
@@ -323,6 +328,24 @@ in
           drag_lock = true;
           disable_while_typing = true;
         };
+      };
+
+      gestures = {
+        gesture = [
+          "3, left, dispatcher, workspace, e+1"
+          "3, right, dispatcher, workspace, e-1"
+          "3, up, dispatcher, fullscreen, 1"
+          "3, down, dispatcher, togglefloating"
+          "3, pinchin, dispatcher, hyprexpo:expo, toggle"
+          "3, pinchout, dispatcher, hyprexpo:expo, toggle"
+
+          "4, left, dispatcher, movewindow, mon:l"
+          "4, right, dispatcher, movewindow, mon:r"
+          "4, up, dispatcher, movetoworkspacesilent, special:magic"
+          "4, down, dispatcher, togglespecialworkspace, magic"
+        ];
+        workspace_swipe_distance = 300;
+        workspace_swipe_invert = true;
       };
 
       device = [
