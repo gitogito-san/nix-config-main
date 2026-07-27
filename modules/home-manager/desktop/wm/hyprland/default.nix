@@ -263,11 +263,6 @@ in
         "4, monitor:DP-2, persistent:true, default:true"
       ];
 
-      misc = {
-        vfr = true;
-        vrr = 0;
-      };
-
       exec-once = [
         "awww-daemon"
         "fcitx5 -d"
