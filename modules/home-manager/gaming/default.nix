@@ -6,6 +6,7 @@
     pkgs.unzip
     pkgs.zip
     pkgs.prismlauncher # Recursive instance-based Minecraft management.
+    pkgs.moonlight-qt
     pkgs.dwarf-fortress-full
     # pkgs.cataclysm-dda # Hardcore post-apocalyptic survival sandbox.
     # pkgs.openttd # Large-scale transport network optimization.
