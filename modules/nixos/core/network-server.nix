@@ -65,4 +65,13 @@
 
   # mosh
   programs.mosh.enable = true;
+
+  # kernel setting
+  boot.kernelParams = [
+    "nvme_core.default_ps_max_latency_us=0"
+  ];
+
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "15s";
+  };
 }
